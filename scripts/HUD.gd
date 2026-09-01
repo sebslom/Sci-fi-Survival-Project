@@ -836,12 +836,12 @@ func _populate_merchant_dialog(npc_type: String, npc_name: String):
 				GameManager.player_stats.gold -= buy_cost
 				GameManager.inventory.append(item_dict.duplicate())
 				if SoundManager: SoundManager.play_pick()
-				GameManager.add_log("Handel", "Zakupiono: %s za %d💰 (300%% wartości bazowej)" % [good["name"], buy_cost])
+				GameManager.add_log("Trade", "Zakupiono: %s za %d💰 (300%% wartości bazowej)" % [good["name"], buy_cost])
 				GameManager.emit_signal("stats_changed")
 				GameManager.emit_signal("inventory_changed")
 				_populate_merchant_dialog(npc_type, npc_name)
 			else:
-				GameManager.add_log("Handel", "⚠️ Brak wystarczającej ilości Złota (%d 💰)!" % buy_cost)
+				GameManager.add_log("Trade", "⚠️ Brak wystarczającej ilości Złota (%d 💰)!" % buy_cost)
 		)
 		hbox.add_child(btn)
 		merchant_vbox.add_child(hbox)

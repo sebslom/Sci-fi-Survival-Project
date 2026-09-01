@@ -53,4 +53,4 @@ func interact(player_node = null):
 		if GameManager: GameManager.add_log("Plecak", "🎒 Odzyskano wszystkie przedmioty z plecaka po śmierci!")
 		queue_free()
 	else:
-		if GameManager: GameManager.add_log("Ostrzeżenie", "⚠️ Brak miejsca w ekwipunku na resztę przedmiotów! Zwolnij miejsce i naciśnij [E] ponownie.")
+		if GameManager: GameManager.add_log("Warning", "⚠️ Brak miejsca w ekwipunku na resztę przedmiotów! Zwolnij miejsce i naciśnij [E] ponownie.")

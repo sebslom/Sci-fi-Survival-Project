@@ -29,7 +29,7 @@ func _setup_clone_stats():
 			perception_range = 28.0; attack_cooldown = 1.0
 			scale = Vector3(0.85, 0.9, 0.85)
 		"heavy":
-			enemy_name = "Klon Ciężki Strażnik"
+			enemy_name = "Heavy Guard Clone"
 			hp = 140; max_hp = 140; damage = 25; move_speed = 3.5
 			perception_range = 18.0; attack_cooldown = 1.8
 			scale = Vector3(1.3, 1.2, 1.3)
@@ -94,7 +94,7 @@ func _fire_laser_at_player():
 			SurvivalManager.inflict_damage(float(damage), false)
 
 		if SoundManager: SoundManager.play_hit()
-		GameManager.add_log("Walka", "⚡ ATAK (%s): -%d HP!" % [enemy_name, damage])
+		GameManager.add_log("Combat", "⚡ ATAK (%s): -%d HP!" % [enemy_name, damage])
 		GameManager.emit_signal("stats_changed")
 
 func take_damage(dmg_amount: int):

@@ -8,7 +8,7 @@ func take_damage(amount):
 		SoundManager.play_mining()
 	
 	if hp <= 0:
-		GameManager.add_log("Wydobycie", "Zniszczono Kryształ Obcego! (+1 Scrap Metalowy)")
+		GameManager.add_log("Mining", "Alien Crystal Destroyed! (+1 Industrial Scrap)")
 		GameManager.inventory.append({
 			"id": "c_scrap_" + str(randi()),
 			"name": "Scrap Metalowy",

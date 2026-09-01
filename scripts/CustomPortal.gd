@@ -59,9 +59,9 @@ func tune_portal(biome: String, target_seed: int):
 
 func get_interaction_prompt() -> String:
 	if bypass_procedural_seed or not target_scene_path.is_empty():
-		return "[E] Wejdź do: %s 🌀" % portal_name
+		return "[E] Enter: %s 🌀" % portal_name
 	var biome_title = target_biome.to_upper()
-	return "[E] Otwórz Konfigurator Portalu Kwantowego (%s) 🌀" % biome_title
+	return "[E] Open Quantum Portal Configurator (%s) 🌀" % biome_title
 
 func _on_body_entered(body):
 	if body and body.is_in_group("player") and not is_teleporting:

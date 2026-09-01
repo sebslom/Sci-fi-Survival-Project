@@ -61,7 +61,7 @@ func _check_player_sound_or_laser_activity():
 			is_aggroed = true
 			if SoundManager: SoundManager.play_alarm()
 			if GameManager:
-				GameManager.add_log("Ostrzeżenie", "⚙️ RDZAWY ŻNIWIARZ WYKRYŁ HUK/LASER! Aktywacja Agresywnej Szarży 'Harvest'!")
+				GameManager.add_log("Warning", "⚙️ RDZAWY ŻNIWIARZ WYKRYŁ HUK/LASER! Aktywacja Agresywnej Szarży 'Harvest'!")
 			_update_label()
 
 func _process_harvest_attack(delta):
@@ -102,7 +102,7 @@ func _execute_reaper_harvest_strike():
 		GameManager.player_stats.hp = max(0, GameManager.player_stats.hp - damage)
 		if SurvivalManager:
 			SurvivalManager.inflict_damage(float(damage), false)
-		GameManager.add_log("Walka", "⚙️ UDERZENIE RDZAWEGO ŻNIWIARZA: -%d HP!" % damage)
+		GameManager.add_log("Combat", "⚙️ UDERZENIE RDZAWEGO ŻNIWIARZA: -%d HP!" % damage)
 		GameManager.emit_signal("stats_changed")
 
 func take_damage_custom(dmg_amount: int, hit_from_pos: Vector3):
@@ -123,7 +123,7 @@ func take_damage_custom(dmg_amount: int, hit_from_pos: Vector3):
 		var armored_dmg = max(1, int(dmg_amount * 0.1))
 		if SoundManager: SoundManager.play_pick()
 		if GameManager:
-			GameManager.add_log("Pancerz", "🛡️ GRUBY PANCERZ TERRAFORMERA POCHŁONĄŁ STRZAŁ (-90%%)! (Traf w plecy!)")
+			GameManager.add_log("Armor", "🛡️ GRUBY PANCERZ TERRAFORMERA POCHŁONĄŁ STRZAŁ (-90%%)! (Traf w plecy!)")
 		take_damage(armored_dmg)
 
 func take_damage(dmg_amount: int):
@@ -137,7 +137,7 @@ func take_damage(dmg_amount: int):
 func _die():
 	if SoundManager: SoundManager.play_level_up()
 	if GameManager:
-		GameManager.add_log("Zwycięstwo", "⚙️ ZNISZCZONO STAROŻYTNEGO RDZAWEGO ŻNIWIARZA!")
+		GameManager.add_log("Victory", "⚙️ ZNISZCZONO STAROŻYTNEGO RDZAWEGO ŻNIWIARZA!")
 		GameManager.player_stats.gold += 120
 		GameManager.player_stats.exp += 90
 		

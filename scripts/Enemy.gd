@@ -57,7 +57,7 @@ func _setup_enemy_stats():
 		perception_range = 16.0
 		is_armored = true
 	elif enemy_type == "boss_mutant":
-		enemy_name = "👹 DUŻY MUTANT MARSJAŃSKI (BOSS)"
+		enemy_name = "👹 HEAVY MARTIAN MUTANT (BOSS)"
 		hp = 250; max_hp = 250; damage = 25; exp_reward = 200; move_speed = 3.2
 		perception_range = 30.0
 		is_boss = true
@@ -133,7 +133,7 @@ func attack_player():
 	if is_boss:
 		GameManager.add_log("Boss", "💥 " + enemy_name + " ZATRATOWAŁ CIĘ! (-" + str(damage) + " HP)")
 	else:
-		GameManager.add_log("Walka", "⚠️ " + enemy_name + " zaatakował Cię! (-" + str(damage) + " HP)")
+		GameManager.add_log("Combat", "⚠️ " + enemy_name + " zaatakował Cię! (-" + str(damage) + " HP)")
 
 func take_damage(amount: int, ammo_type: String = "standard"):
 	# Being shot alerts the enemy immediately regardless of distance
@@ -144,15 +144,15 @@ func take_damage(amount: int, ammo_type: String = "standard"):
 	if is_armored:
 		if ammo_type == "ap":
 			final_damage = final_damage * 1.25 # AP ignores armor and deals +25% bonus
-			GameManager.add_log("Walka", "🎯 PRZEBITO PANCERZ amunicją AP!")
+			GameManager.add_log("Combat", "🎯 ARMOR PIERCED with AP ammo!")
 		elif ammo_type == "standard":
 			final_damage = final_damage * 0.5 # Standard ammo reduced by 50% on armored targets
-			GameManager.add_log("Walka", "🛡️ Pancerz zredukował obrażenia o 50%! Użyj amunicji AP [R].")
+			GameManager.add_log("Combat", "🛡️ Armor reduced damage by 50%! Use AP ammo [R].")
 
 	if ammo_type == "incendiary":
 		is_burning = true
 		burn_timer = 3.0
-		GameManager.add_log("Walka", "🔥 Podpalono cel amunicją zapalającą!")
+		GameManager.add_log("Combat", "🔥 Target ignited with incendiary ammo!")
 
 	hp -= int(final_damage)
 	if SoundManager:
@@ -161,7 +161,7 @@ func take_damage(amount: int, ammo_type: String = "standard"):
 	if is_boss:
 		GameManager.add_log("Boss", "Trafiłeś Bossa za " + str(int(final_damage)) + " HP! (" + str(max(0, hp)) + " / " + str(max_hp) + ")")
 	else:
-		GameManager.add_log("Walka", "Trafiłeś " + enemy_name + " za " + str(int(final_damage)) + " obrażeń!")
+		GameManager.add_log("Combat", "Trafiłeś " + enemy_name + " za " + str(int(final_damage)) + " obrażeń!")
 	
 	if hp <= 0:
 		if SoundManager:
@@ -169,7 +169,7 @@ func take_damage(amount: int, ammo_type: String = "standard"):
 		if is_boss:
 			GameManager.add_log("Boss", "🏆 POKONAŁEŚ DUŻEGO MUTANTA MARSJAŃSKIEGO! (+" + str(exp_reward) + " EXP)")
 		else:
-			GameManager.add_log("Walka", "Pokonałeś " + enemy_name + "! (+" + str(exp_reward) + " EXP)")
+			GameManager.add_log("Combat", "Pokonałeś " + enemy_name + "! (+" + str(exp_reward) + " EXP)")
 		
 		GameManager.add_exp(exp_reward)
 		queue_free()

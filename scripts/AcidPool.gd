@@ -26,5 +26,5 @@ func _apply_acid_damage():
 			SurvivalManager.inflict_damage(damage_per_sec, false)
 
 		if SoundManager: SoundManager.play_hit()
-		GameManager.add_log("Toksyna", "☣️ WEJŚCIE W TOKSYCZNĄ PLAMĘ KWASU GOLIATA! -8 HP i uszkodzenie skafandra!")
+		GameManager.add_log("Toxin", "☣️ STEPPED IN TOXIC GOLIATH ACID POOL! -8 HP and suit damage!")
 		GameManager.emit_signal("stats_changed")

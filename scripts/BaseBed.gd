@@ -12,5 +12,5 @@ func get_interaction_prompt() -> String:
 func interact():
 	GameManager.player_stats.hp = min(GameManager.player_stats.max_hp, GameManager.player_stats.hp + 50)
 	if SoundManager: SoundManager.play_level_up()
-	GameManager.add_log("Odpoczynek", "😴 ZAŚNIĘTO NA PRYCZY: Regeneracja +50 HP i odzyskanie sił w schronie.")
+	GameManager.add_log("Rest", "😴 RESTED ON BUNK: Regenerated +50 HP and recovered energy.")
 	GameManager.emit_signal("stats_changed")

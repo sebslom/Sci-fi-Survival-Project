@@ -99,7 +99,7 @@ modulate = Color(0.980392, 0.752941, 0.141176, 1)
 [node name="NpcArmsDealer" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0.9, 18)
 script = ExtResource("2")
-npc_name = "Handlarz Bronią i Amunicją"
+npc_name = "Weapons & Ammo Merchant"
 npc_type = "weapon_merchant"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NpcArmsDealer"]

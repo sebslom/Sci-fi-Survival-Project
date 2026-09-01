@@ -89,7 +89,7 @@ shape = SubResource("BoxShape3D_dmg")
 
 [node name="Label3D" type="Label3D" parent="DamageZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-text = "⚠️ STREFA OBRAŻEŃ (-10 HP/s)"
+text = "⚠️ DAMAGE ZONE (-10 HP/s)"
 modulate = Color(0.937255, 0.266667, 0.266667, 1)
 
 [node name="PortalActive" type="Area3D" parent="."]
@@ -152,16 +152,16 @@ text = "⚡ Bandyta Szturmowiec"
 
 [node name="SpawnHeavyBtn" type="Button" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
 layout_mode = 2
-text = "💥 Bandyta Ciężki Pancerz"
+text = "💥 Heavy Armored Bandit"
 
 [node name="SpawnBossBtn" type="Button" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.937255, 0.266667, 0.266667, 1)
-text = "👹 DUŻY MUTANT MARSJAŃSKI (BOSS)"
+text = "👹 HEAVY MARTIAN MUTANT (BOSS)"
 
 [node name="SpawnCampPrefabBtn" type="Button" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
 layout_mode = 2
-text = "📦 Prefab Obóz z Kontenerami"
+text = "📦 Container Camp Prefab"
 
 [node name="SpawnBossArenaPrefabBtn" type="Button" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
 layout_mode = 2
@@ -169,7 +169,7 @@ text = "🏛️ Prefab Arena Bossa"
 
 [node name="SpawnCrystalBtn" type="Button" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
 layout_mode = 2
-text = "✨ Spawn: Kryształ Obcego"
+text = "✨ Spawn: Alien Crystal"
 
 [node name="AddMatsBtn" type="Button" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
 layout_mode = 2
@@ -177,12 +177,12 @@ text = "⚙️ +99 Scrapu i Drewna"
 
 [node name="GodModeBtn" type="Button" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
 layout_mode = 2
-text = "🛡️ Tryb Nieśmiertelności"
+text = "🛡️ Invincibility Mode (Godmode)"
 
 [node name="ResetSceneBtn" type="Button" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.266667, 0.133333, 1)
-text = "🔄 Resetuj Scenę Testową"
+text = "🔄 Reset Test Scene"
 
 [connection signal="pressed" from="DevCanvasLayer/DevPanel/VBoxContainer/SpawnScoutBtn" to="." method="spawn_enemy" binds= ["bandit_scout"]]
 [connection signal="pressed" from="DevCanvasLayer/DevPanel/VBoxContainer/SpawnAssaultBtn" to="." method="spawn_enemy" binds= ["bandit_assault"]]

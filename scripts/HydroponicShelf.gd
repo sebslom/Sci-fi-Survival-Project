@@ -46,7 +46,7 @@ func _update_visuals():
 func interact():
 	if not BasePowerGrid.is_machine_powered(self):
 		if SoundManager: SoundManager.play_hit()
-		GameManager.add_log("Zasilanie", "⚡ BRAK ZASILANIA! Maszyna wymaga prądu z Panela Słonecznego lub Reaktora!")
+		GameManager.add_log("Power", "⚡ BRAK ZASILANIA! Maszyna wymaga prądu z Panela Słonecznego lub Reaktora!")
 		return
 
 	if state == "empty":

@@ -21,7 +21,7 @@ func _setup_locked_exit_portal():
 			portal_col_shape.disabled = true
 
 		if GameManager:
-			GameManager.add_log("Misja", "🔒 DROGA UCIECZKI ZABROKOWANA! Pokonaj Nadzorcę Klonów ALPHA, aby odblokować Portal Powrotny!")
+			GameManager.add_log("Mission", "🔒 ESCAPE ROUTE LOCKED! Defeat Clone Overseer ALPHA to unlock Return Portal!")
 
 func _spawn_clone_minions():
 	var minion_script = load("res://scripts/CloneMinion.gd")
@@ -165,4 +165,4 @@ func _on_boss_defeated():
 			SoundManager.play_level_up()
 
 		if GameManager:
-			GameManager.add_log("Zwycięstwo", "🏆 BOSS POKONANY! Portal Powrotny do Schronu Bazy został odblokowany [E]! 🚀")
+			GameManager.add_log("Victory", "🏆 BOSS DEFEATED! Return Portal to Base Shelter unlocked [E]! 🚀")

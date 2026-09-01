@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var enemy_name = "Klon Strażniczy z Tarczą"
+@export var enemy_name = "Shield Guard Clone"
 @export var hp = 160
 @export var max_hp = 160
 @export var damage = 18
@@ -72,7 +72,7 @@ func _fire_shot():
 		if SurvivalManager:
 			SurvivalManager.inflict_damage(float(damage), false)
 		if SoundManager: SoundManager.play_hit()
-		GameManager.add_log("Walka", "💥 STRZAŁ STRAŻNIKA: -%d HP!" % damage)
+		GameManager.add_log("Combat", "💥 GUARD SHOT: -%d HP!" % damage)
 		GameManager.emit_signal("stats_changed")
 
 func _throw_emp_grenade():
@@ -80,7 +80,7 @@ func _throw_emp_grenade():
 	
 	if SoundManager: SoundManager.play_alarm()
 	if GameManager:
-		GameManager.add_log("Ostrzeżenie", "⚡ STRAŻNIK RZUCA GRANAT EMP! Zakłócenie latarki, HUD oraz broni energetycznych na 5 sekund!")
+		GameManager.add_log("Warning", "⚡ GUARD THREW EMP GRENADE! Flashlight, HUD, and energy weapons disabled for 5s!")
 
 	# Disable player flashlight
 	var flashlight = player_ref.get_node_or_null("Head/Camera3D/Flashlight")
@@ -107,7 +107,7 @@ func take_damage_custom(dmg_amount: int, hit_from_pos: Vector3, is_leg_shot: boo
 		# Shield blocks damage!
 		if SoundManager: SoundManager.play_pick()
 		if GameManager:
-			GameManager.add_log("Pancerz", "🛡️ TARCZA BALISTYCZNA STRAŻNIKA ZABLOKOWAŁA STRZAŁ! (Celuj w nogi lub zajdź go od tyłu!)")
+			GameManager.add_log("Armor", "🛡️ GUARD BALISTIC SHIELD BLOCKED SHOT! (Aim for legs or flank from behind!)")
 		return
 
 	take_damage(dmg_amount)

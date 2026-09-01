@@ -45,4 +45,4 @@ func _on_radiation_tick():
 
 func interact():
 	if SoundManager: SoundManager.play_pick()
-	GameManager.add_log("Zasilanie", "☢️ GENERATOR IZOTOPOWY: Generuje +60 kW czystej energii jądrowej dla bazy.")
+	GameManager.add_log("Power", "☢️ GENERATOR IZOTOPOWY: Generuje +60 kW czystej energii jądrowej dla bazy.")

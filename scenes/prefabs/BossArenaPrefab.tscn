@@ -48,7 +48,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_pillar")
 [node name="GiantMarsMutantBoss" type="CharacterBody3D" parent="."]
 transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, 0, 1.8, 0)
 script = ExtResource("1")
-enemy_name = "👹 DUŻY MUTANT MARSJAŃSKI (BOSS)"
+enemy_name = "👹 HEAVY MARTIAN MUTANT (BOSS)"
 enemy_type = "boss_mutant"
 hp = 250
 max_hp = 250

@@ -12,4 +12,4 @@ func _ready():
 	# Initialize random seed in _ready()
 	seed(expedition_seed)
 
-	GameManager.add_log("Ekspedycja", "🚀 ZAINICJOWANO SCENĘ EXPEDITION MARS (SEED #%d)!" % expedition_seed)
+	GameManager.add_log("Expedition", "🚀 INITIALIZED EXPEDITION MARS SCENE (SEED #%d)!" % expedition_seed)

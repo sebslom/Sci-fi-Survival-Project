@@ -48,7 +48,7 @@ shape = SubResource("Shape_Floor")
 [node name="WeaponsDealer" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.9, 15)
 script = ExtResource("4_npc")
-npc_name = "Handlarz Bronią (Arsenal)"
+npc_name = "Weapons Merchant (Arsenal)"
 npc_type = "weapons_dealer"
 
 [node name="Label3D" type="Label3D" parent="WeaponsDealer"]
@@ -66,7 +66,7 @@ npc_type = "scrap_dealer"
 [node name="Label3D" type="Label3D" parent="ScrapDealer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
 billboard = 1
-text = "⚙️ HANDLARZ ZŁOMEM I SUROWCAMI [E]"
+text = "⚙️ SCRAP & MATERIAL MERCHANT [E]"
 modulate = Color(0.06, 0.72, 0.5, 1)
 
 [node name="Portal" type="Area3D" parent="."]

@@ -157,7 +157,7 @@ script = ExtResource("3_hydro")
 [node name="Label3D" type="Label3D" parent="LogisticsModules/HydroponicsTable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 billboard = 1
-text = "🌱 STÓŁ HYDROPONICZNY [E]"
+text = "🌱 HYDROPONIC FARM TABLE [E]"
 modulate = Color(0, 0.95, 1, 1)
 
 [node name="RecyclingStation" type="StaticBody3D" parent="LogisticsModules"]

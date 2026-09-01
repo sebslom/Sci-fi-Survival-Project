@@ -22,7 +22,7 @@ func _ready():
 
 func _update_label():
 	if label_3d:
-		label_3d.text = "☣️ %s [HP: %d / %d]\n[ODRZUT - SAMOBÓJCZA EKSPLOZJA]" % [enemy_name, hp, max_hp]
+		label_3d.text = "☣️ %s [HP: %d / %d]\n[WARNING - SUICIDAL EXPLOSION]" % [enemy_name, hp, max_hp]
 		label_3d.visible = false
 
 func _physics_process(delta):
@@ -72,7 +72,7 @@ func _explode():
 	if SoundManager: SoundManager.play_alarm()
 
 	if GameManager:
-		GameManager.add_log("EKSPLOZJA", "💥 EKSPLOZJA NIESTABILNEJ KRWI KLONA-DEFEKTA! Obrażenia obszarowe w promieniu 4.5m!")
+		GameManager.add_log("EKSPLOZJA", "💥 UNSTABLE CLONE DEFECT BLOOD EXPLOSION! AOE damage in 4.5m radius!")
 
 	# AOE Damage calculation
 	var players = get_tree().get_nodes_in_group("player")

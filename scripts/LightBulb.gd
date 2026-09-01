@@ -41,15 +41,15 @@ func interact(player_node = null):
 		if PowerGrid and PowerGrid.is_power_online():
 			is_physically_lit = true
 			if SoundManager: SoundManager.play_pick()
-			if GameManager: GameManager.add_log("Zasilanie", "💡 Włączono oświetlenie żarówki (Pobór: %.1f kW)." % power_consumption)
+			if GameManager: GameManager.add_log("Power", "💡 Włączono oświetlenie żarówki (Pobór: %.1f kW)." % power_consumption)
 		else:
 			is_physically_lit = false
 			if SoundManager: SoundManager.play_hit()
-			if GameManager: GameManager.add_log("Zasilanie", "⚠️ OSTRZEŻENIE: Brak wystarczającego prądu w sieci bazy!")
+			if GameManager: GameManager.add_log("Power", "⚠️ OSTRZEŻENIE: Brak wystarczającego prądu w sieci bazy!")
 	else:
 		is_physically_lit = false
 		if SoundManager: SoundManager.play_pick()
-		if GameManager: GameManager.add_log("Zasilanie", "🔌 Wyłączono żarówkę.")
+		if GameManager: GameManager.add_log("Power", "🔌 Wyłączono żarówkę.")
 
 	_update_visuals()
 

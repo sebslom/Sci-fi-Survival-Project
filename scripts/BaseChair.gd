@@ -7,8 +7,8 @@ func _ready():
 		label_3d.visible = false
 
 func get_interaction_prompt() -> String:
-	return "[E] Usiądź na Krześle Taktycznym 🪑"
+	return "[E] Sit on Tactical Chair 🪑"
 
 func interact():
 	if SoundManager: SoundManager.play_pick()
-	GameManager.add_log("Odpoczynek", "🪑 Usiadłeś na krześle taktycznym w bazie. Odzyskiwanie kondycji...")
+	GameManager.add_log("Rest", "🪑 Sat on tactical chair. Recovering condition...")

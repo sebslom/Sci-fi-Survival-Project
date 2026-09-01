@@ -14,12 +14,12 @@ func _ready():
 func register_producer(amount: float):
 	total_supply = max(0.0, total_supply + amount)
 	_recalculate_grid()
-	if GameManager: GameManager.add_log("Zasilanie", "⚡ Zwiększono produkcję energii: +%.1f kW [Suma: %.1f kW]" % [amount, total_supply])
+	if GameManager: GameManager.add_log("Power", "⚡ Zwiększono produkcję energii: +%.1f kW [Suma: %.1f kW]" % [amount, total_supply])
 
 func unregister_producer(amount: float):
 	total_supply = max(0.0, total_supply - amount)
 	_recalculate_grid()
-	if GameManager: GameManager.add_log("Zasilanie", "⚡ Zmniejszono produkcję energii: -%.1f kW [Suma: %.1f kW]" % [amount, total_supply])
+	if GameManager: GameManager.add_log("Power", "⚡ Zmniejszono produkcję energii: -%.1f kW [Suma: %.1f kW]" % [amount, total_supply])
 
 func register_consumer(amount: float):
 	total_demand = max(0.0, total_demand + amount)
@@ -40,7 +40,7 @@ func _recalculate_grid():
 
 	if not prev_online and is_online:
 		emit_signal("power_restored")
-		if GameManager: GameManager.add_log("Zasilanie", "🟢 ZASILANIE BAZY PRZYWRÓCONE! (Produkcja: %.1f kW / Pobór: %.1f kW)" % [total_supply, total_demand])
+		if GameManager: GameManager.add_log("Power", "🟢 ZASILANIE BAZY PRZYWRÓCONE! (Produkcja: %.1f kW / Pobór: %.1f kW)" % [total_supply, total_demand])
 	elif prev_online and not is_online:
 		emit_signal("power_outage")
-		if GameManager: GameManager.add_log("Zasilanie", "🔴 AWARIA ZASILANIE BAZY! PRZECIĄŻENIE SIECI! (Produkcja: %.1f kW / Pobór: %.1f kW)" % [total_supply, total_demand])
+		if GameManager: GameManager.add_log("Power", "🔴 AWARIA ZASILANIE BAZY! PRZECIĄŻENIE SIECI! (Produkcja: %.1f kW / Pobór: %.1f kW)" % [total_supply, total_demand])

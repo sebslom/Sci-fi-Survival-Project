@@ -42,7 +42,7 @@ func _unburrow_burst():
 			mesh_instance.material_override = mat
 	if SoundManager: SoundManager.play_alarm()
 	if GameManager:
-		GameManager.add_log("Ostrzeżenie", "🦂 MARSJAŃSKI SKAKUN WYSKOCZYŁ Z REGOLITU! ATAK Z DOSKOKU!")
+		GameManager.add_log("Warning", "🦂 MARSJAŃSKI SKAKUN WYSKOCZYŁ Z REGOLITU! ATAK Z DOSKOKU!")
 
 func _update_label():
 	if label_3d:
@@ -114,7 +114,7 @@ func _execute_suit_puncture_attack():
 		if SurvivalManager:
 			SurvivalManager.inflict_damage(float(damage), false)
 
-		GameManager.add_log("Walka", "🦂 ATAK SKAKUNA: -%d HP i ROZSZCZELNIENIE SKAFANDRA (-%d%%)!" % [damage, suit_damage])
+		GameManager.add_log("Combat", "🦂 ATAK SKAKUNA: -%d HP i ROZSZCZELNIENIE SKAFANDRA (-%d%%)!" % [damage, suit_damage])
 		GameManager.emit_signal("stats_changed")
 
 func take_damage(dmg_amount: int):

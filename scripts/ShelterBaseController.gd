@@ -58,4 +58,4 @@ func _update_power_display(is_online: bool, generated: float, demand: float):
 func interact():
 	if SoundManager: SoundManager.play_pick()
 	var state_str = "AKTYWNA 🟢" if BasePowerGrid.is_power_online else "OFFLINE 🔴"
-	GameManager.add_log("Zasilanie", "⚡ KONSOLA SIECI ZASILANIA BAZY: Wygenerowano %.1f kW | Pobór: %.1f kW (Stan: %s)" % [BasePowerGrid.total_generated, BasePowerGrid.total_demand, state_str])
+	GameManager.add_log("Power", "⚡ KONSOLA SIECI ZASILANIA BAZY: Wygenerowano %.1f kW | Pobór: %.1f kW (Stan: %s)" % [BasePowerGrid.total_generated, BasePowerGrid.total_demand, state_str])

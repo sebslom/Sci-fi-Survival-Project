@@ -20,6 +20,7 @@ var recoil_offset = 0.0
 var is_sprinting = false
 var last_y_velocity = 0.0
 var is_aiming_scope = false
+var placement_cooldown_timer: float = 0.0
 
 # Building Ghost Preview
 var ghost_mesh_instance: MeshInstance3D = null
@@ -120,6 +121,8 @@ func _setup_ghost_preview():
 
 	ghost_area = Area3D.new()
 	ghost_area.name = "GhostArea"
+	ghost_area.collision_layer = 0
+	ghost_area.collision_mask = 1
 	ghost_col_shape = CollisionShape3D.new()
 	var bshape = BoxShape3D.new()
 	bshape.size = Vector3(1.2, 1.2, 1.2)
@@ -139,10 +142,18 @@ func _setup_ghost_preview():
 	ghost_mesh_instance.visible = false
 	add_child(ghost_mesh_instance)
 
+	if raycast:
+		raycast.add_exception(ghost_mesh_instance)
+		raycast.add_exception(ghost_area)
+
 func _is_typing() -> bool:
 	var chat_nodes = get_tree().get_nodes_in_group("chat_box")
 	if chat_nodes.size() > 0 and chat_nodes[0].has_method("is_typing_active"):
-		return chat_nodes[0].is_typing_active()
+		if chat_nodes[0].is_typing_active():
+			return true
+	var focus_owner = get_viewport().gui_get_focus_owner()
+	if focus_owner and (focus_owner is LineEdit or focus_owner is TextEdit):
+		return true
 	return false
 
 func _input(event):
@@ -263,6 +274,7 @@ func _update_crosshair_target_inspection():
 		hud.update_target_inspection("")
 
 func _process_movement(delta):
+	placement_cooldown_timer = max(0.0, placement_cooldown_timer - delta)
 	if _is_typing():
 		velocity.x = 0.0
 		velocity.z = 0.0
@@ -384,14 +396,40 @@ func _update_ghost_building_preview():
 		ghost_mesh_instance.visible = false
 		return
 
+	if raycast:
+		raycast.add_exception(ghost_mesh_instance)
+		if ghost_area: raycast.add_exception(ghost_area)
+
 	if raycast and raycast.is_colliding():
 		var col_point = raycast.get_collision_point()
 		var col_normal = raycast.get_collision_normal()
 		var col_node = raycast.get_collider()
 
+		if col_node == ghost_mesh_instance or col_node == ghost_area:
+			return
+
 		var f_type = active_slot.get("furnitureType", "")
 		var is_wall_mounted = f_type in ["painting", "wall_cabinet", "wall_shelf", "light_bulb", "wall_window", "wall_doorway", "window_glass", "door"]
 		var is_ceiling_mounted = f_type in ["light_bulb"]
+
+		# Assign preview mesh size matching object dimensions
+		var mesh_box_size = Vector3(1.2, 1.2, 1.2)
+		if f_type in ["floor", "roof"]: mesh_box_size = Vector3(2.0, 0.2, 2.0)
+		elif f_type == "stairs": mesh_box_size = Vector3(2.0, 3.0, 2.0)
+		elif f_type in ["door", "wall_doorway", "wall_window"]: mesh_box_size = Vector3(2.0, 3.0, 0.2)
+		elif f_type == "window_glass": mesh_box_size = Vector3(1.5, 1.5, 0.1)
+		elif f_type in ["decon_chamber", "isotope"]: mesh_box_size = Vector3(2.0, 3.0, 2.0)
+		elif f_type == "bed": mesh_box_size = Vector3(1.2, 0.8, 2.2)
+		elif f_type == "chair": mesh_box_size = Vector3(0.8, 1.0, 0.8)
+		elif f_type == "distiller": mesh_box_size = Vector3(1.5, 2.0, 1.5)
+		elif f_type == "hydro_shelf": mesh_box_size = Vector3(1.6, 2.4, 1.0)
+		elif f_type == "table": mesh_box_size = Vector3(2.2, 1.0, 1.4)
+		elif f_type == "wardrobe": mesh_box_size = Vector3(1.6, 2.8, 1.0)
+
+		if not ghost_mesh_instance.mesh or not (ghost_mesh_instance.mesh is BoxMesh) or ghost_mesh_instance.mesh.get("size") != mesh_box_size:
+			var new_box = BoxMesh.new()
+			new_box.size = mesh_box_size
+			ghost_mesh_instance.mesh = new_box
 
 		# Flexible Placement: Smart Target Snapping OR Free Ground/Wall Placement
 		var target_btype = str(col_node.get("building_type")) if col_node else ""
@@ -411,13 +449,7 @@ func _update_ghost_building_preview():
 		ghost_mesh_instance.visible = true
 
 		# Update ghost collision shape dimensions for overlap check
-		var ghost_box_size = Vector3(1.2, 1.2, 1.2)
-		if f_type in ["floor", "roof"]: ghost_box_size = Vector3(1.8, 0.18, 1.8)
-		elif f_type == "stairs": ghost_box_size = Vector3(1.8, 2.8, 1.8)
-		elif f_type in ["door", "wall_doorway", "wall_window"]: ghost_box_size = Vector3(1.8, 2.4, 0.15)
-		elif f_type == "window_glass": ghost_box_size = Vector3(1.3, 1.3, 0.06)
-		elif f_type in ["decon_chamber", "isotope"]: ghost_box_size = Vector3(1.8, 2.4, 1.8)
-
+		var ghost_box_size = mesh_box_size * 0.9
 		if ghost_col_shape and ghost_col_shape.shape is BoxShape3D:
 			ghost_col_shape.shape.size = ghost_box_size
 
@@ -426,7 +458,7 @@ func _update_ghost_building_preview():
 		if ghost_area:
 			var overlapping_bodies = ghost_area.get_overlapping_bodies()
 			for body in overlapping_bodies:
-				if body == self: continue # Ignore player character body
+				if body == self or body == ghost_mesh_instance: continue
 				# Ignore ground terrain surface
 				var bname = body.name.to_lower()
 				if bname.contains("ground") or bname.contains("terrain") or body.is_in_group("terrain"):
@@ -438,7 +470,6 @@ func _update_ghost_building_preview():
 				is_intersecting = true
 				break
 
-		var is_connected_to_structure = (col_node != null)
 		if is_wall_mounted:
 			is_ghost_valid = (abs(col_normal.y) < 0.5 or (is_ceiling_mounted and col_normal.y < -0.5) or (col_node and col_node.is_in_group("placed_structure"))) and not is_intersecting
 		else:
@@ -468,6 +499,9 @@ func use_active_hotbar_item():
 	elif item_type == "flashlight":
 		use_flashlight_melee_attack(active_slot)
 	elif item_type == "furniture" and ghost_mesh_instance and ghost_mesh_instance.visible and is_ghost_valid:
+		if placement_cooldown_timer > 0.0:
+			return
+		placement_cooldown_timer = 0.3
 		place_furniture_structure(active_slot, ghost_target_pos)
 	else:
 		use_unarmed_attack()
@@ -487,7 +521,7 @@ func use_flashlight_melee_attack(item_dict: Dictionary):
 			if target_node and target_node != self and not target_node.is_in_group("player") and target_node.has_method("take_damage"):
 				var dmg = 7 # Unarmed (5) + 2 = 7 DMG
 				target_node.take_damage(dmg)
-				if GameManager: GameManager.add_log("Walka", "🔦 TACTICAL FLASHLIGHT ATTACK: -%d HP (Atak bez broni +2)!" % dmg)
+				if GameManager: GameManager.add_log("Combat", "🔦 TACTICAL FLASHLIGHT ATTACK: -%d HP (Atak bez broni +2)!" % dmg)
 
 	if SoundManager: SoundManager.play_hit()
 
@@ -506,7 +540,7 @@ func use_unarmed_attack():
 			if target_node and target_node != self and not target_node.is_in_group("player") and target_node.has_method("take_damage"):
 				var dmg = 5
 				target_node.take_damage(dmg)
-				if GameManager: GameManager.add_log("Walka", "👊 ATAK PIĘŚCIĄ (Walka Wręcz): -%d HP!" % dmg)
+				if GameManager: GameManager.add_log("Combat", "👊 ATAK PIĘŚCIĄ (Walka Wręcz): -%d HP!" % dmg)
 
 	if SoundManager: SoundManager.play_hit()
 
@@ -526,7 +560,7 @@ func use_broken_weapon_club(item_dict: Dictionary):
 				var dmg = 6
 				var w_name = item_dict.get("name", "Zepsuta Broń")
 				target_node.take_damage(dmg)
-				if GameManager: GameManager.add_log("Walka", "🔨 ATAK ZEPSUTĄ BRONIĄ (%s): -%d HP (Atak bez broni +1)!" % [w_name, dmg])
+				if GameManager: GameManager.add_log("Combat", "🔨 ATAK ZEPSUTĄ BRONIĄ (%s): -%d HP (Atak bez broni +1)!" % [w_name, dmg])
 
 	if SoundManager: SoundManager.play_hit()
 
@@ -587,7 +621,7 @@ func use_melee_weapon(item_dict: Dictionary):
 			if target_node and target_node != self and not target_node.is_in_group("player") and target_node.has_method("take_damage"):
 				var dmg = item_dict.get("damage", 35)
 				target_node.take_damage(dmg)
-				GameManager.add_log("Walka", "💥 Melee weapon slash: -" + str(dmg) + " HP!")
+				GameManager.add_log("Combat", "💥 Melee weapon slash: -" + str(dmg) + " HP!")
 
 	if SoundManager: SoundManager.play_pick()
 

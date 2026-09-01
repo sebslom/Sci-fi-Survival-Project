@@ -9,7 +9,7 @@ func _ready():
 func get_interaction_prompt() -> String:
 	if not BasePowerGrid.is_machine_powered(self):
 		return "⚡ Brak Zasilania Komory"
-	return "[E] Użyj Komory Odkażającej (Koszt: 1x Bio-Paliwo) ✨"
+	return "[E] Use Decontamination Chamber (Cost: 1x Bio-Fuel) ✨"
 
 func update_power_status(online: bool):
 	is_powered = online
@@ -22,7 +22,7 @@ func _update_visuals():
 func interact():
 	if not BasePowerGrid.is_machine_powered(self):
 		if SoundManager: SoundManager.play_hit()
-		GameManager.add_log("Zasilanie", "⚡ BRAK ZASILANIA! Komora odkażająca wymaga energii bazy.")
+		GameManager.add_log("Power", "⚡ NO POWER! Decontamination chamber requires base power.")
 		return
 
 	# Check for 1x Fuel in inventory
@@ -35,7 +35,7 @@ func interact():
 
 	if fuel_idx < 0:
 		if SoundManager: SoundManager.play_hit()
-		GameManager.add_log("Dekontaminacja", "⚠️ BRAK PALIWA! Decontamination Chamber wymaga 1x Bio-Paliwo (Wytwórz w zaawansowanym rzemiośle).")
+		GameManager.add_log("Decontamination", "⚠️ NO FUEL! Decontamination Chamber requires 1x Bio-Fuel canister.")
 		return
 
 	# Consume 1x Fuel
@@ -58,6 +58,6 @@ func interact():
 	if SoundManager:
 		SoundManager.play_level_up()
 
-	GameManager.add_log("Dekontaminacja", "✨ PEŁNA DEKONTAMINACJA BIO-MEDYCZNA! Wyleczono złamania, zatrucia i krwawienie. Skafander i zdrowie: 100%.")
+	GameManager.add_log("Decontamination", "✨ FULL BIO-MEDICAL DECONTAMINATION! Cured fractures, poisoning, and bleeding. Suit and health 100%.")
 	GameManager.emit_signal("stats_changed")
 	GameManager.emit_signal("inventory_changed")

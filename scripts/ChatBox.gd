@@ -10,20 +10,22 @@ func _ready():
 	add_to_group("chat_box")
 	if chat_input:
 		chat_input.text_submitted.connect(_on_chat_submitted)
-	add_chat_message("SYSTEM", "Witaj w komunikatorze taktycznym Sci-Fi Survival Project! Naciśnij [Enter] lub [T], aby pisać.", true)
+	add_chat_message("SYSTEM", "Welcome to Sci-Fi Survival Project Tactical Comms! Press [Enter] or [T] to chat.", true)
 
 func is_typing_active() -> bool:
 	return is_chat_active or (chat_input and chat_input.has_focus())
 
 func _unhandled_input(event):
 	if is_typing_active():
-		if event.is_action_pressed("ui_cancel") or (event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE):
-			_close_chat_input()
-			get_viewport().set_input_as_handled()
-			return
+		if event is InputEventKey and event.pressed:
+			if event.keycode == KEY_ESCAPE:
+				_close_chat_input()
+				get_viewport().set_input_as_handled()
+				return
+		return
 
-	if event.is_action_pressed("ui_accept") or (event is InputEventKey and event.pressed and event.keycode == KEY_T and not is_typing_active()):
-		if not is_typing_active():
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode in [KEY_ENTER, KEY_KP_ENTER, KEY_T]:
 			_open_chat_input()
 			get_viewport().set_input_as_handled()
 
@@ -46,7 +48,7 @@ func _on_chat_submitted(text: String):
 		if clean_text.begins_with("/"):
 			_parse_local_slash_command(clean_text)
 		else:
-			var sender_name = GameManager.player_name if GameManager and GameManager.get("player_name") else "Gracz"
+			var sender_name = GameManager.player_name if GameManager and GameManager.get("player_name") else "Player"
 			var peer_id = 1
 			if multiplayer and multiplayer.has_multiplayer_peer() and multiplayer.multiplayer_peer:
 				peer_id = multiplayer.get_unique_id()
@@ -64,32 +66,32 @@ func _parse_local_slash_command(command_text: String):
 		"/clear":
 			if chat_history:
 				chat_history.text = ""
-			add_chat_message("SYSTEM", "🧹 Wyczyszczono historię czatu.", true)
+			add_chat_message("SYSTEM", "🧹 Chat history cleared.", true)
 		"/suicide":
-			add_chat_message("SYSTEM", "⚠️ WYKONANO KOMENDĘ SAMOBÓJSTWA (/suicide)!", true)
+			add_chat_message("SYSTEM", "⚠️ EXECUTED SUICIDE COMMAND (/suicide)!", true)
 			if GameManager and GameManager.player_stats:
 				GameManager.player_stats.hp = 0
 				var players = get_tree().get_nodes_in_group("player")
 				var p_node = players[0] if players.size() > 0 else null
 				GameManager.handle_player_death(p_node)
 		"/devroom", "/dev":
-			add_chat_message("SYSTEM", "🔧 PRZENOSZENIE DO PRYWATNEJ SESJI TESTOWEJ DEVROOM...", true)
+			add_chat_message("SYSTEM", "🔧 TELEPORTING TO PRIVATE DEVROOM TEST SESSION...", true)
 			if GameManager:
 				GameManager.is_private_server = true
 				GameManager.travel_to("expedition")
 		_:
-			add_chat_message("SYSTEM", "⚠️ Unknown komenda: %s. Dostępne: /clear, /suicide, /devroom" % cmd, true)
+			add_chat_message("SYSTEM", "⚠️ Unknown command: %s. Available: /clear, /suicide, /devroom" % cmd, true)
 
 @rpc("any_peer", "call_local", "reliable")
 func rpc_send_chat_message(sender_peer_id: int, sender_name: String, message_text: String):
 	if not chat_history: return
 
-	var formatted_line = "[color=#00f3ff][b][Gracz %d (%s)][/b][/color]: %s\n" % [sender_peer_id, sender_name, message_text]
+	var formatted_line = "[color=#00f3ff][b][Player %d (%s)][/b][/color]: %s\n" % [sender_peer_id, sender_name, message_text]
 	chat_history.text += formatted_line
 	chat_history.scroll_to_line(chat_history.get_line_count())
 
 	if GameManager and GameManager.has_method("add_log"):
-		GameManager.add_log("Czat", "[Gracz %d]: %s" % [sender_peer_id, message_text])
+		GameManager.add_log("Chat", "[Player %d]: %s" % [sender_peer_id, message_text])
 
 func add_chat_message(sender_name: String, message_text: String, is_system: bool = false):
 	if not chat_history: return
@@ -98,4 +100,3 @@ func add_chat_message(sender_name: String, message_text: String, is_system: bool
 	var formatted_line = "[color=%s][b][%s][/b][/color]: %s\n" % [color_hex, sender_name, message_text]
 	
 	chat_history.text += formatted_line
-	chat_history.scroll_to_line(chat_history.get_line_count())

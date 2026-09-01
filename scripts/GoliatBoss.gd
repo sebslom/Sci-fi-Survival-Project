@@ -193,7 +193,7 @@ func take_damage(dmg_amount: int):
 func _die():
 	if SoundManager: SoundManager.play_level_up()
 	if GameManager:
-		GameManager.add_log("Zwycięstwo", "🏆 POKONANO LEGIENDARNEGO BOSSA PROTOTYP GOLIAT!")
+		GameManager.add_log("Victory", "🏆 POKONANO LEGIENDARNEGO BOSSA PROTOTYP GOLIAT!")
 		GameManager.player_stats.gold += 800
 		GameManager.player_stats.exp += 400
 		

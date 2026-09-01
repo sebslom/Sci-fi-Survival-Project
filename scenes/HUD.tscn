@@ -78,7 +78,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.22, 0.74, 0.97, 1)
 theme_override_font_sizes/font_size = 12
-text = "⚡ Sieć Zasilania: 30.0 kW / 15.0 kW [ONLINE 🟢]"
+text = "⚡ Power Grid: 30.0 kW / 15.0 kW [ONLINE 🟢]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -140,7 +140,7 @@ text = "Skafander: 100% 🛡️"
 layout_mode = 2
 theme_override_colors/font_color = Color(0.658824, 0.333333, 0.968627, 1)
 theme_override_font_sizes/font_size = 13
-text = "Udźwig: 38.5 / 60.0 kg (64%) 🎒"
+text = "Weight: 38.5 / 60.0 kg (64%) 🎒"
 
 [node name="HungerBox" type="VBoxContainer" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox"]
 layout_mode = 2
@@ -150,7 +150,7 @@ theme_override_constants/separation = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.960784, 0.623529, 0.0431373, 1)
 theme_override_font_sizes/font_size = 13
-text = "Głód: 100 / 100"
+text = "Hunger: 100 / 100"
 
 [node name="ThirstBox" type="VBoxContainer" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox"]
 layout_mode = 2
@@ -166,7 +166,7 @@ text = "Pragnienie: 100 / 100"
 layout_mode = 2
 theme_override_colors/font_color = Color(0.980392, 0.752941, 0.141176, 1)
 theme_override_font_sizes/font_size = 13
-text = "Złoto: 150 💰"
+text = "Gold: 150 💰"
 
 [node name="ActiveItemBottomRightPanel" type="Panel" parent="Control"]
 layout_mode = 1
@@ -219,7 +219,7 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
 theme_override_font_sizes/font_size = 14
-text = "Pistolet Laserowy [1]"
+text = "Laser Pistol [1]"
 horizontal_alignment = 1
 
 [node name="ToggleLogButton" type="Button" parent="Control"]
@@ -404,7 +404,7 @@ layout_mode = 2
 [node name="MpTitle" type="Label" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.98, 0.75, 0.14, 1)
-text = "🌐 LOBBY MULTIPLAYER & PO KÓJ"
+text = "🌐 MULTIPLAYER LOBBY & ROOM"
 
 [node name="HBoxMp" type="HBoxContainer" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox"]
 layout_mode = 2
@@ -412,7 +412,7 @@ theme_override_constants/separation = 10
 
 [node name="RoomLabel" type="Label" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox/HBoxMp"]
 layout_mode = 2
-text = "Pokój: MARS-7829"
+text = "Room: MARS-7829"
 
 [node name="PrivateCheck" type="CheckBox" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox/HBoxMp"]
 layout_mode = 2
@@ -422,7 +422,7 @@ text = "Serwer Prywatny"
 [node name="PassEdit" type="LineEdit" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox/HBoxMp"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
-placeholder_text = "Hasło"
+placeholder_text = "Password"
 text = "1337"
 
 [node name="PlayersLabel" type="Label" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox"]
@@ -436,7 +436,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Modals/ModalPause/VBoxContainer/VolumeBox"]
 layout_mode = 2
-text = "🔊 Głośność Dźwięku:"
+text = "🔊 Audio Volume:"
 
 [node name="VolumeSlider" type="HSlider" parent="Modals/ModalPause/VBoxContainer/VolumeBox"]
 layout_mode = 2
@@ -463,7 +463,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Modals/ModalPause/VBoxContainer/ResBox"]
 layout_mode = 2
-text = "🖥️ Rozdzielczość Okna:"
+text = "🖥️ Window Resolution:"
 
 [node name="ResolutionOption" type="OptionButton" parent="Modals/ModalPause/VBoxContainer/ResBox"]
 layout_mode = 2
@@ -479,7 +479,7 @@ theme_override_constants/separation = 10
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "💾 ZAPISZ BAZĘ I POSTAĆ"
+text = "💾 SAVE BASE & CHARACTER"
 
 [node name="LoadBtn" type="Button" parent="Modals/ModalPause/VBoxContainer/HBoxSaveLoad"]
 custom_minimum_size = Vector2(0, 36)
@@ -491,7 +491,7 @@ text = "📂 WCZYTAJ STAN GRY"
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.266667, 0.133333, 1)
-text = "💾 ZAPISZ I WYJDŹ DO MENU GŁÓWNEGO"
+text = "💾 SAVE & EXIT TO MAIN MENU"
 
 [node name="ModalInventory" type="Panel" parent="Modals"]
 visible = false
@@ -530,7 +530,7 @@ theme_override_constants/separation = 8
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
 theme_override_font_sizes/font_size = 17
-text = "WYPOSAŻENIE POSTACI & ARTEFAKTY"
+text = "CHARACTER EQUIPMENT & ARTIFACTS"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel"]
@@ -554,7 +554,7 @@ text = "🛡️ EKWIPUNEK (STATYSTYKI)"
 [node name="HelmetSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox"]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
-text = "🪖 Hełm: [Pusty]"
+text = "🪖 Helmet: [Empty]"
 
 [node name="MaskSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox"]
 custom_minimum_size = Vector2(0, 42)
@@ -586,12 +586,12 @@ theme_override_constants/separation = 6
 layout_mode = 2
 theme_override_colors/font_color = Color(0.658824, 0.333333, 0.968627, 1)
 theme_override_font_sizes/font_size = 13
-text = "🎨 KOSMETYKA (TYLKO WYGLĄD)"
+text = "🎨 COSMETICS (VISUAL ONLY)"
 
 [node name="CosmHelmetSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/CosmVBox"]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
-text = "🎨 Hełm (Kosmetyczny)"
+text = "🎨 Helmet (Cosmetic)"
 
 [node name="CosmMaskSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/CosmVBox"]
 custom_minimum_size = Vector2(0, 42)
@@ -648,7 +648,7 @@ text = "🔮 #5"
 layout_mode = 2
 theme_override_colors/font_color = Color(0.0627451, 0.72549, 0.505882, 1)
 theme_override_font_sizes/font_size = 14
-text = "Pojemność: 20 / 20 Slotów"
+text = "Capacity: 20 / 20 Slots"
 horizontal_alignment = 1
 
 [node name="InventoryPanel" type="VBoxContainer" parent="Modals/ModalInventory/HBoxMain"]
@@ -696,7 +696,7 @@ offset_bottom = 45.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.980392, 0.752941, 0.141176, 1)
 theme_override_font_sizes/font_size = 20
-text = "RZEMIOSŁO I ZAAWANSOWANE MEBLE [C]"
+text = "CRAFTING & BASE FURNITURE [C]"
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Modals/ModalCrafting"]
@@ -771,7 +771,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Modals/ModalPortal/VBoxContainer/HBoxBiome"]
 layout_mode = 2
-text = "🪐 Wybór Biom / Strefy:"
+text = "🪐 Biome / Zone Selection:"
 
 [node name="BiomeOption" type="OptionButton" parent="Modals/ModalPortal/VBoxContainer/HBoxBiome"]
 layout_mode = 2
@@ -782,7 +782,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Modals/ModalPortal/VBoxContainer/HBoxSeed"]
 layout_mode = 2
-text = "🧬 Seed (Współrzędne):"
+text = "🧬 Seed (Coordinates):"
 
 [node name="SeedEdit" type="LineEdit" parent="Modals/ModalPortal/VBoxContainer/HBoxSeed"]
 layout_mode = 2
@@ -801,7 +801,7 @@ size_flags_vertical = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(0.98, 0.75, 0.14, 1)
 theme_override_font_sizes/font_size = 13
-text = "Zasięg: Powierzchnia Marsa | Niestabilność: 5% | Tier Łupu: III"
+text = "Range: Planetary Surface | Instability: 5% | Loot Tier: III"
 horizontal_alignment = 1
 vertical_alignment = 1
 

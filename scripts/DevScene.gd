@@ -14,7 +14,7 @@ func reset_dev_scene():
 	GameManager.player_stats.hp = GameManager.player_stats.max_hp
 	GameManager.player_stats.hunger = 100
 	GameManager.player_stats.thirst = 100
-	GameManager.add_log("Dev", "🛠️ Załadowano Scenę Deweloperską! Stan zresetowany.")
+	GameManager.add_log("Dev", "🛠️ Loaded Dev Scene! State reset.")
 
 func _process(delta):
 	_process_zones(delta)
@@ -44,7 +44,7 @@ func _process_zones(delta):
 					GameManager.player_stats.hp = max(0, GameManager.player_stats.hp - 10)
 					GameManager.emit_signal("stats_changed")
 					if SoundManager: SoundManager.play_hit()
-					GameManager.add_log("Dev", "⚠️ Strefa Obrażeń (-10 HP)!")
+					GameManager.add_log("Dev", "⚠️ Damage Zone (-10 HP)!")
 
 # Spawning Functions
 func spawn_enemy(enemy_type: String):
@@ -120,7 +120,7 @@ func spawn_crystal():
 	spawner_container.add_child(crystal_body)
 
 	if SoundManager: SoundManager.play_pick()
-	GameManager.add_log("Dev", "Zespawnowano Kryształ Obcego")
+	GameManager.add_log("Dev", "Spawned Alien Crystal")
 
 func add_dev_materials():
 	GameManager.inventory.append({"id": "scrap_dev_" + str(randi()), "name": "Scrap Metalowy", "type": "scrap", "count": 99, "color": "#94a3b8", "icon": "⚙️", "desc": "Dev Surowiec"})
@@ -134,9 +134,9 @@ func toggle_god_mode():
 	if is_god_mode:
 		GameManager.player_stats.max_hp = 9999
 		GameManager.player_stats.hp = 9999
-		GameManager.add_log("Dev", "🛡️ Włączono Tryb Nieśmiertelności (Godmode)!")
+		GameManager.add_log("Dev", "🛡️ Invincibility Mode (Godmode) Enabled!")
 	else:
 		GameManager.player_stats.max_hp = 100
 		GameManager.player_stats.hp = 100
-		GameManager.add_log("Dev", "Wyłączono Tryb Nieśmiertelności.")
+		GameManager.add_log("Dev", "Invincibility Mode Disabled.")
 	GameManager.emit_signal("stats_changed")

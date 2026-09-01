@@ -14,7 +14,7 @@ func _ready():
 	add_to_group("placed_structure")
 
 func get_interaction_prompt() -> String:
-	return "[E] Otwórz Skrzynię Magazynową [%d/%d]" % [stored_items.size(), max_slots]
+	return "[E] Open Storage Chest [%d/%d]" % [stored_items.size(), max_slots]
 
 func interact(player_node = null):
 	var hud_nodes = get_tree().get_nodes_in_group("hud")
@@ -29,7 +29,7 @@ func take_damage(amount: float):
 	hp -= amount
 	if SoundManager: SoundManager.play_hit()
 	if GameManager:
-		GameManager.add_log("Skrzynia", "💥 Uszkodzono skrzynię: %d/%d HP" % [int(max(0, hp)), int(max_hp)])
+		GameManager.add_log("Skrzynia", "💥 Chest damaged: %d/%d HP" % [int(max(0, hp)), int(max_hp)])
 	
 	if hp <= 0.0:
 		die()
@@ -40,7 +40,7 @@ func die():
 	
 	if SoundManager: SoundManager.play_hit()
 	if GameManager:
-		GameManager.add_log("Skrzynia", "💥 ZNISZCZONO SKRZYNIĘ! Zawartość została rozrzucona na ziemię!")
+		GameManager.add_log("Skrzynia", "💥 CHEST DESTROYED! Loot dropped on ground!")
 
 	# 1. Spawn all stored items onto the ground as physical InteractableItem3D objects
 	for item in stored_items:

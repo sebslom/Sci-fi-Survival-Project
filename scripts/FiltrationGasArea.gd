@@ -14,5 +14,5 @@ func _physics_process(delta):
 				
 				if SoundManager and randf() < 0.1:
 					SoundManager.play_hit()
-				GameManager.add_log("Kopalnie", "☣️ TOKSYCZNY GAZ KOLEKTORA (Stopień " + str(required_filtration_grade) + ")! Twoja Maska (Stopień " + str(player_grade) + ") przepuszcza toksyny! (-" + str(int(ceil(dmg))) + " HP)")
+				GameManager.add_log("Mines", "☣️ TOXIC COLLECTOR GASA (Stopień " + str(required_filtration_grade) + ")! Your Mask (Grade " + str(player_grade) + ") is leaking toxins! (-" + str(int(ceil(dmg))) + " HP)")
 				GameManager.emit_signal("stats_changed")

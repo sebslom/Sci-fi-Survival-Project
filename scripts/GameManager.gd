@@ -50,7 +50,7 @@ var model_placeholders = [
 	"Alpha Scout 🛡️ (#00f3ff)",
 	"Ciężki Komandos 💣 (#f59e0b)",
 	"Bio-Hazard Suit ☣️ (#10b981)",
-	"Inżynier Techniczny ⚙️ (#a855f7)"
+	"Technical Engineer ⚙️ (#a855f7)"
 ]
 
 # Multiplayer & Server Settings
@@ -73,10 +73,10 @@ var timer_node: Timer = null
 # Functional Equipment
 var equipment = {
 	"helmet": null,
-	"mask": { "id": "gas_mask_default", "name": "Maska Gazowa (Stopień 1)", "type": "gas_mask", "filter_grade": 1, "icon": "😷", "desc": "Podstawowa ochrona przed gazem" },
+	"mask": { "id": "gas_mask_default", "name": "Gas Mask (Grade 1)", "type": "gas_mask", "filter_grade": 1, "icon": "😷", "desc": "Basic gas protection" },
 	"armor": null,
 	"boots": null,
-	"backpack": { "id": "bp_travel", "name": "Plecak Turystyczny", "type": "backpack", "extra_slots": 8, "max_weight": 180.0, "icon": "🎒", "desc": "+8 Slotów, Limit 180kg" }
+	"backpack": { "id": "bp_travel", "name": "Hiking Backpack", "type": "backpack", "extra_slots": 8, "max_weight": 180.0, "icon": "🎒", "desc": "+8 Slotów, Limit 180kg" }
 }
 
 # Cosmetic Equipment
@@ -98,17 +98,17 @@ var ammo_inventory = {
 }
 
 var inventory = [
-	{ "id": "watch_1", "name": "Zegarek Taktyczny", "type": "watch", "count": 1, "weight": 0.1, "color": "#00f3ff", "icon": "⌚", "desc": "Wyświetla timer wipeoutu" },
-	{ "id": "gps_1", "name": "Moduł GPS / Mapa", "type": "gps", "count": 1, "weight": 0.1, "color": "#10b981", "icon": "🗺️", "desc": "Odblokowuje widok mapy [M]" },
-	{ "id": "w_laser", "name": "Pistolet Laserowy", "type": "weapon", "weaponType": "laser", "count": 1, "ammo_type": "standard", "damage": 18, "weight": 1.5, "color": "#00f3ff", "icon": "🔫", "desc": "Szybki pistolet energetyczny na amunicję STD" },
-	{ "id": "machete_1", "name": "Tactical Machete", "type": "melee", "count": 1, "damage": 35, "weight": 1.5, "color": "#06b6d4", "icon": "🗡️", "desc": "Melee weapon for close combat. Wymaga naprawy po zużyciu!" },
-	{ "id": "rep_kit_start", "name": "Weapon Repair Kit", "type": "repair_kit", "count": 1, "weight": 1.0, "color": "#f59e0b", "icon": "🛠️", "desc": "Naprawia broń palną oraz broń białą do 100% kondycji" },
-	{ "id": "boots_tactical", "name": "Buty Taktyczne Pustynne", "type": "boots", "count": 1, "speed_bonus": 0.8, "weight": 1.2, "color": "#10b981", "icon": "🥾", "desc": "+0.8 m/s Szybkość poruszania się" },
-	{ "id": "helm_composite", "name": "Hełm Kompozytowy", "type": "helmet", "count": 1, "defense_bonus": 12, "weight": 2.0, "color": "#00f3ff", "icon": "🪖", "desc": "+12 Ochrona Głowy" }
+	{ "id": "watch_1", "name": "Tactical Watch", "type": "watch", "count": 1, "weight": 0.1, "color": "#00f3ff", "icon": "⌚", "desc": "Displays emission timer" },
+	{ "id": "gps_1", "name": "GPS / Map Module", "type": "gps", "count": 1, "weight": 0.1, "color": "#10b981", "icon": "🗺️", "desc": "Unlocks map view [M]" },
+	{ "id": "w_laser", "name": "Laser Pistol", "type": "weapon", "weaponType": "laser", "count": 1, "ammo_type": "standard", "damage": 18, "weight": 1.5, "color": "#00f3ff", "icon": "🔫", "desc": "Fast energy pistol using STD ammo" },
+	{ "id": "machete_1", "name": "Tactical Machete", "type": "melee", "count": 1, "damage": 35, "weight": 1.5, "color": "#06b6d4", "icon": "🗡️", "desc": "Melee weapon for close combat. Requires repair when worn out!" },
+	{ "id": "rep_kit_start", "name": "Weapon Repair Kit", "type": "repair_kit", "count": 1, "weight": 1.0, "color": "#f59e0b", "icon": "🛠️", "desc": "Repairs firearms and melee weapons to 100% condition" },
+	{ "id": "boots_tactical", "name": "Desert Tactical Boots", "type": "boots", "count": 1, "speed_bonus": 0.8, "weight": 1.2, "color": "#10b981", "icon": "🥾", "desc": "+0.8 m/s Movement speed" },
+	{ "id": "helm_composite", "name": "Composite Helmet", "type": "helmet", "count": 1, "defense_bonus": 12, "weight": 2.0, "color": "#00f3ff", "icon": "🪖", "desc": "+12 Head Protection" }
 ]
 
 var hotbar = {
-	1: { "id": "w_laser", "name": "Pistolet Laserowy", "type": "weapon", "weaponType": "laser", "count": 1, "ammo_type": "standard", "damage": 18, "weight": 1.5, "color": "#00f3ff", "icon": "🔫" },
+	1: { "id": "w_laser", "name": "Laser Pistol", "type": "weapon", "weaponType": "laser", "count": 1, "ammo_type": "standard", "damage": 18, "weight": 1.5, "color": "#00f3ff", "icon": "🔫" },
 	2: { "id": "machete_1", "name": "Tactical Machete", "type": "melee", "count": 1, "damage": 35, "weight": 1.5, "color": "#06b6d4", "icon": "🗡️" },
 	3: null,
 	4: null,
@@ -143,7 +143,7 @@ func travel_to(new_location: String):
 	custom_destination_scene = ""
 	active_location = new_location
 	emit_signal("location_changed", new_location)
-	add_log("Podróż", "🌀 Przemieszczanie do lokacji: " + new_location.to_upper())
+	add_log("Podróż", "🌀 Traveling to location: " + new_location.to_upper())
 
 func travel_to_custom_scene(scene_path: String):
 	custom_destination_scene = scene_path
@@ -194,7 +194,7 @@ func save_game_state() -> bool:
 		file.store_string(json_str)
 		file.close()
 		if SoundManager: SoundManager.play_level_up()
-		add_log("Save", "💾 STAN GRY I BAZA ZOSTAŁY POMYŚLNIE ZAPISANE DO PLIKU!")
+		add_log("Save", "💾 GAME STATE AND BASE SUCCESSFULLY SAVED TO FILE!")
 		return true
 	return false
 
@@ -212,7 +212,7 @@ func load_game_state() -> bool:
 	var json = JSON.new()
 	var parse_result = json.parse(json_str)
 	if parse_result != OK:
-		add_log("Save", "⚠️ Błąd parsowania pliku zapisu JSON.")
+		add_log("Save", "⚠️ JSON save file parse error.")
 		return false
 
 	var data = json.get_data()
@@ -374,7 +374,7 @@ func reroll_expedition_seed():
 		if portal and portal.has_method("set_expedition_seed"):
 			portal.set_expedition_seed(current_expedition_seed)
 
-	add_log("Emission", "☄️ FALA EMISJI ZMIENIŁA POWIERZCHNIĘ PLANETY! Wygenerowano Nowy Seed Ekspedycji #" + str(current_expedition_seed))
+	add_log("Emission", "☄️ EMISSION WAVE CHANGED PLANETARY SURFACE! Generated New Expedition Seed #" + str(current_expedition_seed))
 	emit_signal("wipeout_timer_updated", wipeout_timer)
 
 func _on_wipeout_second_tick():
@@ -387,7 +387,7 @@ func _on_wipeout_second_tick():
 		emit_signal("wipeout_timer_updated", wipeout_timer)
 		
 		if wipeout_timer == 60:
-			add_log("Ostrzeżenie", "⚠️ OSTRZEŻENIE EMISJI: Fala Anomalityczna Uderzy Za 60 Sekund! Ewakuuj się do Schronu!")
+			add_log("Ostrzeżenie", "⚠️ EMISSION WARNING: Anomaly Wave Hits In 60 Seconds! Evacuate to Base Airlock!")
 			if SoundManager: SoundManager.play_alarm()
 		elif wipeout_timer <= 0:
 			trigger_emission_wave()
@@ -401,14 +401,14 @@ func trigger_emission_wave():
 		player_stats.hp = max(0, player_stats.hp - dmg)
 		damage_suit(30)
 		player_stats.radiation = min(100, player_stats.radiation + 50)
-		add_log("Emission", "💥 UDERZENIE EMISJI MARSJAŃSKIEJ! Received -" + str(dmg) + " HP i Jump Promieniowania (+50 Rad)!")
+		add_log("Emission", "💥 MARTIAN EMISSION WAVE HIT! Took -" + str(dmg) + " HP i Jump Promieniowania (+50 Rad)!")
 		if SoundManager: SoundManager.play_hit()
 		if player_stats.hp <= 0:
 			var players = get_tree().get_nodes_in_group("player")
 			var p_node = players[0] if players.size() > 0 else null
 			handle_player_death(p_node)
 	else:
-		add_log("Emission", "🛡️ SCHRON OSŁONIŁ CIĘ PRZED FALA EMISJI! Powierzchnia Marsa uległa całkowitej zmianie ukształtowania.")
+		add_log("Emission", "🛡️ BASE SHELTER PROTECTED YOU FROM EMISSION WAVE! Planet surface terrain regenerated.")
 
 	reroll_expedition_seed()
 
@@ -471,7 +471,7 @@ func handle_player_death(player_node = null):
 	emit_signal("stats_changed")
 	emit_signal("inventory_changed")
 
-	add_log("Death", "💀 ZGINĄŁEŚ! Twój plecak ze wszystkimi przedmiotami pozostał w miejscu śmierci. Respawning in Shelter!")
+	add_log("Death", "💀 YOU DIED! Your backpack with all items remains at death location. Respawning in Shelter!")
 	if SoundManager: SoundManager.play_hit()
 
 	# 3. Respawn in Shelter
@@ -526,12 +526,12 @@ func load_peer_state(peer_id: int) -> bool:
 	return false
 
 func on_peer_joined(peer_id: int):
-	add_log("Multiplayer", "🌐 Gracz [Peer #%d] dołączył do serwera. Odradzanie w Schronie..." % peer_id)
+	add_log("Multiplayer", "🌐 Player [Peer #%d] joined server. Respawning in Shelter..." % peer_id)
 	load_peer_state(peer_id)
 	travel_to("house")
 
 func on_peer_disconnected(peer_id: int):
-	add_log("Multiplayer", "🔌 Gracz [Peer #%d] rozłączył się. Saveywanie stanu na serwerze..." % peer_id)
+	add_log("Multiplayer", "🔌 Player [Peer #%d] disconnected. Saving state on server..." % peer_id)
 	save_peer_state(peer_id)
 	save_game_state()
 
@@ -644,7 +644,7 @@ func sell_item_to_merchant(inventory_idx: int) -> bool:
 	player_stats.gold += sell_price
 
 	if SoundManager: SoundManager.play_pick()
-	add_log("Handel", "💰 SPRZEDANO [%s]: +%d Złota! (15%% wartości bazowej %d💰)" % [item_name, sell_price, base_val])
+	add_log("Handel", "💰 SOLD [%s]: +%d Gold! (15%% wartości bazowej %d💰)" % [item_name, sell_price, base_val])
 
 	emit_signal("inventory_changed")
 	emit_signal("stats_changed")
@@ -796,7 +796,7 @@ func _init_crafting_recipes():
 		{ "id": "rec_ammo_fire", "name": "Incendiary Ammo Pack (x15)", "cost": { "material_polymer": 2, "wood": 1 }, "result": { "id": "ammo_fire_craft", "name": "Incendiary Ammo Pack (x15)", "type": "ammo_fire_pack", "count": 1, "weight": 0.5, "icon": "🔥", "desc": "Daje +15x Incendiary Ammo" }, "desc": "Craft 15 rounds of Incendiary Ammo", "icon": "🔥" },
 		{ "id": "rec_bandage", "name": "Cloth Bandage", "cost": { "cloth": 2 }, "result": { "id": "bandage_1", "name": "Cloth Bandage", "type": "bandage", "count": 1, "weight": 0.2, "icon": "🩹", "desc": "Stops open wound bleeding" }, "desc": "Basic dressing to stop bleeding", "icon": "🩹" },
 		{ "id": "rec_rag", "name": "Cloth Rags", "cost": { "clothing": 1 }, "result": { "id": "cloth_1", "name": "Fabric Rags", "type": "cloth", "count": 3, "weight": 0.1, "icon": "🧵", "desc": "Crafting material for bandages and ropes" }, "desc": "Shred clothing into 3x Rags", "icon": "🧵" },
-		{ "id": "rec_rope", "name": "Climbing Rope", "cost": { "cloth": 4 }, "result": { "id": "rope_1", "name": "Strong Synthetic Rope", "type": "rope", "count": 1, "weight": 0.8, "icon": "🪢", "desc": "Heavy rope for construction and climbing" }, "desc": "Skręć 4x Szmaty w liny", "icon": "🪢" },
+		{ "id": "rec_rope", "name": "Climbing Rope", "cost": { "cloth": 4 }, "result": { "id": "rope_1", "name": "Strong Synthetic Rope", "type": "rope", "count": 1, "weight": 0.8, "icon": "🪢", "desc": "Heavy rope for construction and climbing" }, "desc": "Twist 4x Rags into rope", "icon": "🪢" },
 		{ "id": "rec_charcoal", "name": "Activated Charcoal", "cost": { "wood": 2 }, "result": { "id": "charcoal_1", "name": "Medical Activated Charcoal", "type": "charcoal", "count": 1, "weight": 0.2, "icon": "🖤", "desc": "Cures food poisoning (-60%)" }, "desc": "Smelt 2x Wood into medical charcoal", "icon": "🖤" },
 		{ "id": "rec_suppressor", "name": "Tactical Sound Suppressor", "cost": { "part_barrel": 1, "material_steel": 2 }, "result": { "id": "attachment_supp", "name": "Tactical Sound Suppressor", "type": "attachment_suppressor", "count": 1, "weight": 0.4, "icon": "🔇", "desc": "Silences gunfire and reduces weapon recoil" }, "desc": "Requires Barrel Part and 2x Steel", "icon": "🔇" },
 		{ "id": "rec_scope", "name": "Sniper Optical Scope", "cost": { "part_receiver": 1, "material_polymer": 2 }, "result": { "id": "attachment_sc", "name": "Sniper Optical Scope", "type": "attachment_scope", "count": 1, "weight": 0.5, "icon": "🔭", "desc": "Sniper zoom on RMB" }, "desc": "Requires Receiver Part and 2x Polymers", "icon": "🔭" },
@@ -906,7 +906,7 @@ func craft_recipe(recipe_id: String) -> bool:
 			if item and item.get("type") == mat:
 				player_has += item.get("count", 1)
 		if player_has < req:
-			add_log("Rzemiosło", "⚠️ Brak surowca: " + mat)
+			add_log("Rzemiosło", "⚠️ Missing material: " + mat)
 			if SoundManager: SoundManager.play_hit()
 			return false
 
@@ -930,19 +930,19 @@ func craft_recipe(recipe_id: String) -> bool:
 	if res_type == "ammo_std_pack":
 		ammo_inventory["standard"] += 30
 		if SoundManager: SoundManager.play_craft()
-		add_log("Rzemiosło", "📦 Wytworzono: 30x Standard Ammo")
+		add_log("Rzemiosło", "📦 Crafted: 30x Standard Ammo")
 	elif res_type == "ammo_ap_pack":
 		ammo_inventory["ap"] += 20
 		if SoundManager: SoundManager.play_craft()
-		add_log("Rzemiosło", "💥 Wytworzono: 20x Amunicja AP")
+		add_log("Rzemiosło", "💥 Crafted: 20x Amunicja AP")
 	elif res_type == "ammo_fire_pack":
 		ammo_inventory["incendiary"] += 15
 		if SoundManager: SoundManager.play_craft()
-		add_log("Rzemiosło", "🔥 Wytworzono: 15x Incendiary Ammo")
+		add_log("Rzemiosło", "🔥 Crafted: 15x Incendiary Ammo")
 	else:
 		inventory.append(result_item)
 		if SoundManager: SoundManager.play_craft()
-		add_log("Rzemiosło", "🔨 Stworzono: " + result_item.get("name", ""))
+		add_log("Rzemiosło", "🔨 Created: " + result_item.get("name", ""))
 
 	emit_signal("inventory_changed")
 	return true
@@ -955,7 +955,7 @@ func add_exp(amount: int):
 		player_stats.max_hp += 10
 		player_stats.hp = player_stats.max_hp
 		if SoundManager: SoundManager.play_level_up()
-		add_log("Awans", "🎉 AWANS NA POZIOM " + str(player_stats.level) + "! Max HP powiększone.")
+		add_log("Awans", "🎉 LEVELED UP TO LEVEL " + str(player_stats.level) + "! Max HP increased.")
 	emit_signal("stats_changed")
 
 func add_log(category: String, message: String):

@@ -140,4 +140,4 @@ func _spawn_random_expedition_enemies():
 			jumper.global_position = j_pos
 
 	if GameManager:
-		GameManager.add_log("Ekspedycja", "👾 ZESPAWNOWANO PRZECIWNIKÓW, ŻNIWIARZY I SKAKUNÓW MARSJAŃSKICH (Seed #" + str(seed_val) + ")")
+		GameManager.add_log("Expedition", "👾 SPAWNED MARTIAN ENEMIES, REAPERS AND JUMPERS (Seed #" + str(seed_val) + ")")
