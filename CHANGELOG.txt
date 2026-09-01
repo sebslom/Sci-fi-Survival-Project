@@ -1,0 +1,18 @@
+==============================================================================
+                    Sci-Fi Survival Project - CHANGELOG
+==============================================================================
+Engine: Godot Engine 4.6 (GDScript)
+Version: 4.51.0 Complete English Localization & Removal of "Misery" References
+Release Date: 01.09.2026
+
+------------------------------------------------------------------------------
+CHANGES AND UPDATES
+------------------------------------------------------------------------------
+1. REMOVAL OF "MISERY" REFERENCES:
+   - Renamed `scripts/MiserySurvivalManager.gd` to `scripts/SurvivalManager.gd`.
+   - Updated `project.godot` autoload from `MiserySurvivalManager` to `SurvivalManager`.
+   - Purged all variables, signal names (`survival_stats_updated`), and text mentions of "Misery" / "misery" across all codebase files.
+
+2. FULL ENGLISH TRANSLATION & LOCALIZATION:
+   - Translated all user-facing UI labels, HUD context menus, inventory modals, main menu buttons, control guides, crafting recipes, item names & descriptions, quest logs, and environmental prompts into English.
+==============================================================================

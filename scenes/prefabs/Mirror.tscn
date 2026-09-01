@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/Mirror.gd" id="1_mirror"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_frame"]
+size = Vector3(1.2, 2.2, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frame"]
+albedo_color = Color(0.18, 0.22, 0.28, 1)
+metallic = 0.8
+roughness = 0.4
+
+[sub_resource type="QuadMesh" id="QuadMesh_glass"]
+size = Vector2(1.0, 2.0)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
+radius = 0.35
+height = 1.7
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_col"]
+size = Vector3(1.2, 2.2, 0.2)
+
+[node name="Mirror" type="StaticBody3D"]
+script = ExtResource("1_mirror")
+
+[node name="FrameMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_frame")
+surface_material_override/0 = SubResource("StandardMaterial3D_frame")
+
+[node name="MirrorQuad" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.06)
+mesh = SubResource("QuadMesh_glass")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_col")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(512, 512)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0.9, 2.2)
+fov = 50.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport"]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 5, 0)
+light_color = Color(1, 0.9, 0.8, 1)
+light_energy = 1.5
+
+[node name="PlayerPreviewMesh" type="MeshInstance3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+mesh = SubResource("CapsuleMesh_player")

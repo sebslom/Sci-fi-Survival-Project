@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/Enemy.gd" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall"]
+albedo_color = Color(0.2, 0.25, 0.35, 1)
+metallic = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall"]
+material = SubResource("StandardMaterial3D_wall")
+size = Vector3(8, 3, 0.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wall"]
+size = Vector3(8, 3, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_crate"]
+size = Vector3(1.6, 1.6, 1.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_crate"]
+albedo_color = Color(0.15, 0.45, 0.35, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_spec_ops"]
+size = Vector3(1.2, 1.5, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_spec_ops"]
+albedo_color = Color(0.1, 0.6, 0.9, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_spec_ops"]
+size = Vector3(1.2, 1.5, 1.2)
+
+[node name="MilitaryBasePrefab" type="Node3D"]
+
+[node name="DestroyedWall1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, -4)
+mesh = SubResource("BoxMesh_wall")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="DestroyedWall1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DestroyedWall1/StaticBody3D"]
+shape = SubResource("BoxShape3D_wall")
+
+[node name="DestroyedWall2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 1.5, 0)
+mesh = SubResource("BoxMesh_wall")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="DestroyedWall2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DestroyedWall2/StaticBody3D"]
+shape = SubResource("BoxShape3D_wall")
+
+[node name="SupplyCrate" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -2)
+mesh = SubResource("BoxMesh_crate")
+surface_material_override/0 = SubResource("StandardMaterial3D_crate")
+
+[node name="SpecOps1" type="CharacterBody3D" parent="."]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, -2, 0.75, 1)
+script = ExtResource("1")
+enemy_name = "Kosmiczna Jednostka Specjalna"
+enemy_type = "spec_ops"
+
+[node name="MeshInstance" type="MeshInstance3D" parent="SpecOps1"]
+mesh = SubResource("BoxMesh_spec_ops")
+surface_material_override/0 = SubResource("StandardMaterial3D_spec_ops")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpecOps1"]
+shape = SubResource("BoxShape3D_spec_ops")
+
+[node name="SpecOps2" type="CharacterBody3D" parent="."]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 2, 0.75, -1)
+script = ExtResource("1")
+enemy_name = "Kosmiczna Jednostka Specjalna"
+enemy_type = "spec_ops"
+
+[node name="MeshInstance" type="MeshInstance3D" parent="SpecOps2"]
+mesh = SubResource("BoxMesh_spec_ops")
+surface_material_override/0 = SubResource("StandardMaterial3D_spec_ops")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpecOps2"]
+shape = SubResource("BoxShape3D_spec_ops")

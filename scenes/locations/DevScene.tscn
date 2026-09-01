@@ -1,0 +1,196 @@
+[gd_scene load_steps=15 format=3]
+
+[ext_resource type="Script" path="res://scripts/DevScene.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/Portal.gd" id="2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
+albedo_color = Color(0.08, 0.12, 0.18, 1)
+roughness = 0.4
+uv1_scale = Vector3(15, 15, 15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+material = SubResource("StandardMaterial3D_floor")
+size = Vector3(60, 0.2, 60)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(60, 0.2, 60)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_heal"]
+albedo_color = Color(0.0627451, 0.72549, 0.505882, 0.6)
+emission_enabled = true
+emission = Color(0.0627451, 0.72549, 0.505882, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_heal"]
+material = SubResource("StandardMaterial3D_heal")
+size = Vector3(8, 0.1, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_heal"]
+size = Vector3(8, 3, 8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmg"]
+albedo_color = Color(0.937255, 0.266667, 0.266667, 0.6)
+emission_enabled = true
+emission = Color(0.937255, 0.266667, 0.266667, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dmg"]
+material = SubResource("StandardMaterial3D_dmg")
+size = Vector3(8, 0.1, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dmg"]
+size = Vector3(8, 3, 8)
+
+[sub_resource type="TorusMesh" id="TorusMesh_portal"]
+inner_radius = 1.0
+outer_radius = 1.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_portal"]
+albedo_color = Color(0, 0.952941, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.952941, 1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_portal"]
+radius = 2.0
+
+[node name="DevScene" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Terrain" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, -0.1, 30)
+mesh = SubResource("BoxMesh_floor")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/StaticBody3D"]
+shape = SubResource("BoxShape3D_floor")
+
+[node name="HealingZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.1, 10)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="HealingZone"]
+mesh = SubResource("BoxMesh_heal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HealingZone"]
+shape = SubResource("BoxShape3D_heal")
+
+[node name="Label3D" type="Label3D" parent="HealingZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "✨ STREFA LECZENIA (+10 HP/s)"
+modulate = Color(0.0627451, 0.72549, 0.505882, 1)
+
+[node name="DamageZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.1, 10)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DamageZone"]
+mesh = SubResource("BoxMesh_dmg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageZone"]
+shape = SubResource("BoxShape3D_dmg")
+
+[node name="Label3D" type="Label3D" parent="DamageZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "⚠️ STREFA OBRAŻEŃ (-10 HP/s)"
+modulate = Color(0.937255, 0.266667, 0.266667, 1)
+
+[node name="PortalActive" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1.2, 45)
+script = ExtResource("2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PortalActive"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("TorusMesh_portal")
+surface_material_override/0 = SubResource("StandardMaterial3D_portal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PortalActive"]
+shape = SubResource("SphereShape3D_portal")
+
+[node name="Label3D" type="Label3D" parent="PortalActive"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "🌀 PORTAL TESTOWY [E]"
+modulate = Color(0, 0.952941, 1, 1)
+
+[node name="Spawners" type="Node3D" parent="."]
+
+[node name="DevCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DevPanel" type="Panel" parent="DevCanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -280.0
+offset_top = 75.0
+offset_right = -20.0
+offset_bottom = 460.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DevCanvasLayer/DevPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = -12.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.658824, 0.333333, 0.968627, 1)
+text = "🛠️ DEV PANEL TESTOWY"
+horizontal_alignment = 1
+
+[node name="SpawnScoutBtn" type="Button" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
+layout_mode = 2
+text = "🔫 Bandyta Zwiadowca"
+
+[node name="SpawnAssaultBtn" type="Button" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
+layout_mode = 2
+text = "⚡ Bandyta Szturmowiec"
+
+[node name="SpawnHeavyBtn" type="Button" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
+layout_mode = 2
+text = "💥 Bandyta Ciężki Pancerz"
+
+[node name="SpawnBossBtn" type="Button" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.266667, 0.266667, 1)
+text = "👹 DUŻY MUTANT MARSJAŃSKI (BOSS)"
+
+[node name="SpawnCampPrefabBtn" type="Button" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
+layout_mode = 2
+text = "📦 Prefab Obóz z Kontenerami"
+
+[node name="SpawnBossArenaPrefabBtn" type="Button" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
+layout_mode = 2
+text = "🏛️ Prefab Arena Bossa"
+
+[node name="SpawnCrystalBtn" type="Button" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
+layout_mode = 2
+text = "✨ Spawn: Kryształ Obcego"
+
+[node name="AddMatsBtn" type="Button" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
+layout_mode = 2
+text = "⚙️ +99 Scrapu i Drewna"
+
+[node name="GodModeBtn" type="Button" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
+layout_mode = 2
+text = "🛡️ Tryb Nieśmiertelności"
+
+[node name="ResetSceneBtn" type="Button" parent="DevCanvasLayer/DevPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.266667, 0.133333, 1)
+text = "🔄 Resetuj Scenę Testową"
+
+[connection signal="pressed" from="DevCanvasLayer/DevPanel/VBoxContainer/SpawnScoutBtn" to="." method="spawn_enemy" binds= ["bandit_scout"]]
+[connection signal="pressed" from="DevCanvasLayer/DevPanel/VBoxContainer/SpawnAssaultBtn" to="." method="spawn_enemy" binds= ["bandit_assault"]]
+[connection signal="pressed" from="DevCanvasLayer/DevPanel/VBoxContainer/SpawnHeavyBtn" to="." method="spawn_enemy" binds= ["bandit_heavy"]]
+[connection signal="pressed" from="DevCanvasLayer/DevPanel/VBoxContainer/SpawnBossBtn" to="." method="spawn_enemy" binds= ["boss_mutant"]]
+[connection signal="pressed" from="DevCanvasLayer/DevPanel/VBoxContainer/SpawnCampPrefabBtn" to="." method="spawn_prefab" binds= ["bandit_camp"]]
+[connection signal="pressed" from="DevCanvasLayer/DevPanel/VBoxContainer/SpawnBossArenaPrefabBtn" to="." method="spawn_prefab" binds= ["boss_arena"]]
+[connection signal="pressed" from="DevCanvasLayer/DevPanel/VBoxContainer/SpawnCrystalBtn" to="." method="spawn_crystal"]
+[connection signal="pressed" from="DevCanvasLayer/DevPanel/VBoxContainer/AddMatsBtn" to="." method="add_dev_materials"]
+[connection signal="pressed" from="DevCanvasLayer/DevPanel/VBoxContainer/GodModeBtn" to="." method="toggle_god_mode"]
+[connection signal="pressed" from="DevCanvasLayer/DevPanel/VBoxContainer/ResetSceneBtn" to="." method="reset_dev_scene"]

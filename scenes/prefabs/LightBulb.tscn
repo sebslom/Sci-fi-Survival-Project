@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/LightBulb.gd" id="1_light"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bulb"]
+albedo_color = Color(0.99, 0.94, 0.54, 1.0)
+emission_enabled = true
+emission = Color(0.99, 0.94, 0.54, 1.0)
+emission_energy_multiplier = 2.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_bulb"]
+material = SubResource("StandardMaterial3D_bulb")
+radius = 0.2
+height = 0.4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_col"]
+radius = 0.2
+
+[node name="LightBulb" type="StaticBody3D"]
+script = ExtResource("1_light")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_bulb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_col")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.992157, 0.941176, 0.541176, 1)
+light_energy = 2.5
+omni_range = 8.0

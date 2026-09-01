@@ -1,0 +1,87 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/MerchantHubManager.gd" id="1_hub_mgr"]
+[ext_resource type="Script" path="res://scripts/Portal.gd" id="2_portal"]
+[ext_resource type="Script" path="res://scripts/WorldEnvironmentManager.gd" id="3_env"]
+[ext_resource type="Script" path="res://scripts/NPC.gd" id="4_npc"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_Floor"]
+albedo_color = Color(0.12, 0.16, 0.22, 1)
+roughness = 0.3
+metallic = 0.6
+
+[sub_resource type="BoxMesh" id="Mesh_Floor"]
+material = SubResource("Mat_Floor")
+size = Vector3(40, 0.2, 40)
+
+[sub_resource type="BoxShape3D" id="Shape_Floor"]
+size = Vector3(40, 0.2, 40)
+
+[sub_resource type="TorusMesh" id="Mesh_PortalRing"]
+inner_radius = 1.2
+outer_radius = 1.5
+
+[sub_resource type="StandardMaterial3D" id="Mat_Portal"]
+albedo_color = Color(0.92, 0.7, 0.03, 1)
+emission_enabled = true
+emission = Color(0.92, 0.7, 0.03, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="SphereShape3D" id="Shape_PortalCol"]
+radius = 2.0
+
+[node name="MerchantHub" type="Node3D"]
+script = ExtResource("1_hub_mgr")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+script = ExtResource("3_env")
+
+[node name="MainFloor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -0.1, 20)
+mesh = SubResource("Mesh_Floor")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MainFloor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainFloor/StaticBody3D"]
+shape = SubResource("Shape_Floor")
+
+[node name="WeaponsDealer" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.9, 15)
+script = ExtResource("4_npc")
+npc_name = "Handlarz Bronią (Arsenal)"
+npc_type = "weapons_dealer"
+
+[node name="Label3D" type="Label3D" parent="WeaponsDealer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+billboard = 1
+text = "🔫 HANDLARZ BRONIĄ [E]"
+modulate = Color(0.98, 0.75, 0.14, 1)
+
+[node name="ScrapDealer" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0.9, 15)
+script = ExtResource("4_npc")
+npc_name = "Handlarz Scrapem i Surowcami"
+npc_type = "scrap_dealer"
+
+[node name="Label3D" type="Label3D" parent="ScrapDealer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+billboard = 1
+text = "⚙️ HANDLARZ ZŁOMEM I SUROWCAMI [E]"
+modulate = Color(0.06, 0.72, 0.5, 1)
+
+[node name="Portal" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1.2, 32)
+script = ExtResource("2_portal")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Portal"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("Mesh_PortalRing")
+surface_material_override/0 = SubResource("Mat_Portal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Portal"]
+shape = SubResource("Shape_PortalCol")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Portal"]
+light_color = Color(0.92, 0.7, 0.03, 1)
+light_energy = 3.0
+omni_range = 8.0

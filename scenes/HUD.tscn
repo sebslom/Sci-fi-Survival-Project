@@ -1,0 +1,931 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/HUD.gd" id="1"]
+
+[node name="HUD" type="CanvasLayer" groups=["hud"]]
+script = ExtResource("1")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HeaderLeftPanel" type="Panel" parent="Control"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 15.0
+offset_right = 260.0
+offset_bottom = 55.0
+
+[node name="LocationLabel" type="Label" parent="Control/HeaderLeftPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
+theme_override_font_sizes/font_size = 15
+text = "SCHRON TAKTYCZNY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeaderRightPanel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_top = 15.0
+offset_right = -20.0
+offset_bottom = 55.0
+grow_horizontal = 0
+
+[node name="TimerLabel" type="Label" parent="Control/HeaderRightPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.266667, 0.133333, 1)
+theme_override_font_sizes/font_size = 14
+text = "☄️ EMISJA: 05:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PowerStatusPanel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_top = 62.0
+offset_right = -20.0
+offset_bottom = 92.0
+grow_horizontal = 0
+
+[node name="PowerLabel" type="Label" parent="Control/PowerStatusPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.22, 0.74, 0.97, 1)
+theme_override_font_sizes/font_size = 12
+text = "⚡ Sieć Zasilania: 30.0 kW / 15.0 kW [ONLINE 🟢]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VitalsMarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -290.0
+offset_right = 276.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VitalsPanel" type="Panel" parent="Control/VitalsMarginContainer"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Control/VitalsMarginContainer/VitalsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VitalsVBox" type="VBoxContainer" parent="Control/VitalsMarginContainer/VitalsPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HPBox" type="VBoxContainer" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="HPText" type="Label" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox/HPBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0627451, 0.72549, 0.505882, 1)
+theme_override_font_sizes/font_size = 13
+text = "HP: 100 / 100"
+
+[node name="SuitBox" type="VBoxContainer" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="SuitText" type="Label" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox/SuitBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.95, 1, 1)
+theme_override_font_sizes/font_size = 13
+text = "Skafander: 100% 🛡️"
+
+[node name="WeightText" type="Label" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.658824, 0.333333, 0.968627, 1)
+theme_override_font_sizes/font_size = 13
+text = "Udźwig: 38.5 / 60.0 kg (64%) 🎒"
+
+[node name="HungerBox" type="VBoxContainer" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="HungerText" type="Label" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox/HungerBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.960784, 0.623529, 0.0431373, 1)
+theme_override_font_sizes/font_size = 13
+text = "Głód: 100 / 100"
+
+[node name="ThirstBox" type="VBoxContainer" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="ThirstText" type="Label" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox/ThirstBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.235294, 0.51, 0.964706, 1)
+theme_override_font_sizes/font_size = 13
+text = "Pragnienie: 100 / 100"
+
+[node name="GoldText" type="Label" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.980392, 0.752941, 0.141176, 1)
+theme_override_font_sizes/font_size = 13
+text = "Złoto: 150 💰"
+
+[node name="ActiveItemBottomRightPanel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -230.0
+offset_top = -110.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ActiveItemBottomRightPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 6.0
+offset_right = -10.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+
+[node name="HBoxTop" type="HBoxContainer" parent="Control/ActiveItemBottomRightPanel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="IconLabel" type="Label" parent="Control/ActiveItemBottomRightPanel/VBoxContainer/HBoxTop"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "🔫"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountLabel" type="Label" parent="Control/ActiveItemBottomRightPanel/VBoxContainer/HBoxTop"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.980392, 0.752941, 0.141176, 1)
+theme_override_font_sizes/font_size = 16
+text = "999 / 999"
+vertical_alignment = 1
+
+[node name="NameLabel" type="Label" parent="Control/ActiveItemBottomRightPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Pistolet Laserowy [1]"
+horizontal_alignment = 1
+
+[node name="ToggleLogButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 65.0
+offset_right = 150.0
+offset_bottom = 98.0
+text = "📜 Dziennik [L]"
+
+[node name="LogPanel" type="Panel" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 20.0
+offset_top = 105.0
+offset_right = 320.0
+offset_bottom = 360.0
+
+[node name="LogBox" type="VBoxContainer" parent="Control/LogPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Control/LogPanel/LogBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.639216, 0.721569, 1)
+text = "DZIENNIK ZWIADOWCY [L]"
+
+[node name="TextEdit" type="TextEdit" parent="Control/LogPanel/LogBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 12
+editable = false
+wrap_mode = 1
+
+[node name="Crosshair" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TargetInspectLabel" type="Label" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 25.0
+offset_right = 200.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NotificationLabel" type="Label" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_top = 0.15
+anchor_right = 0.5
+anchor_bottom = 0.15
+offset_left = -250.0
+offset_right = 250.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.74902, 0.141176, 1)
+theme_override_font_sizes/font_size = 18
+text = "Powiadomienie..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Modals" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ModalPause" type="Panel" parent="Modals"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -340.0
+offset_top = -280.0
+offset_right = 340.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Modals/ModalPause"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 12.0
+offset_bottom = 38.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Sci-Fi Survival Project - MENU PAUZY & MULTIPLAYER [P]"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Modals/ModalPause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 45.0
+offset_right = -20.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="HBoxCustom" type="HBoxContainer" parent="Modals/ModalPause/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="NickBox" type="VBoxContainer" parent="Modals/ModalPause/VBoxContainer/HBoxCustom"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Modals/ModalPause/VBoxContainer/HBoxCustom/NickBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06, 0.95, 0.6, 1)
+text = "👤 Nick Gracza:"
+
+[node name="NickEdit" type="LineEdit" parent="Modals/ModalPause/VBoxContainer/HBoxCustom/NickBox"]
+layout_mode = 2
+text = "Zwiadowca_Alpha"
+
+[node name="ModelBox" type="VBoxContainer" parent="Modals/ModalPause/VBoxContainer/HBoxCustom"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Modals/ModalPause/VBoxContainer/HBoxCustom/ModelBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.33, 0.96, 1)
+text = "🎽 Model Postaci 3D:"
+
+[node name="ModelOption" type="OptionButton" parent="Modals/ModalPause/VBoxContainer/HBoxCustom/ModelBox"]
+layout_mode = 2
+
+[node name="MultiplayerBox" type="VBoxContainer" parent="Modals/ModalPause/VBoxContainer"]
+layout_mode = 2
+
+[node name="MpTitle" type="Label" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98, 0.75, 0.14, 1)
+text = "🌐 LOBBY MULTIPLAYER & PO KÓJ"
+
+[node name="HBoxMp" type="HBoxContainer" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RoomLabel" type="Label" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox/HBoxMp"]
+layout_mode = 2
+text = "Pokój: MARS-7829"
+
+[node name="PrivateCheck" type="CheckBox" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox/HBoxMp"]
+layout_mode = 2
+button_pressed = true
+text = "Serwer Prywatny"
+
+[node name="PassEdit" type="LineEdit" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox/HBoxMp"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+placeholder_text = "Hasło"
+text = "1337"
+
+[node name="PlayersLabel" type="Label" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.58, 0.63, 0.72, 1)
+theme_override_font_sizes/font_size = 12
+text = "Gracze w pokoju (1/4): Zwiadowca_Alpha (Host)"
+
+[node name="VolumeBox" type="VBoxContainer" parent="Modals/ModalPause/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Modals/ModalPause/VBoxContainer/VolumeBox"]
+layout_mode = 2
+text = "🔊 Głośność Dźwięku:"
+
+[node name="VolumeSlider" type="HSlider" parent="Modals/ModalPause/VBoxContainer/VolumeBox"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="PixelBox" type="VBoxContainer" parent="Modals/ModalPause/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Modals/ModalPause/VBoxContainer/PixelBox"]
+layout_mode = 2
+text = "👾 Skalowanie 3D / Pikselizacja:"
+
+[node name="PixelSlider" type="HSlider" parent="Modals/ModalPause/VBoxContainer/PixelBox"]
+layout_mode = 2
+min_value = 0.25
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="ResBox" type="VBoxContainer" parent="Modals/ModalPause/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Modals/ModalPause/VBoxContainer/ResBox"]
+layout_mode = 2
+text = "🖥️ Rozdzielczość Okna:"
+
+[node name="ResolutionOption" type="OptionButton" parent="Modals/ModalPause/VBoxContainer/ResBox"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Modals/ModalPause/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxSaveLoad" type="HBoxContainer" parent="Modals/ModalPause/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SaveBtn" type="Button" parent="Modals/ModalPause/VBoxContainer/HBoxSaveLoad"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "💾 ZAPISZ BAZĘ I POSTAĆ"
+
+[node name="LoadBtn" type="Button" parent="Modals/ModalPause/VBoxContainer/HBoxSaveLoad"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "📂 WCZYTAJ STAN GRY"
+
+[node name="MainMenuButton" type="Button" parent="Modals/ModalPause/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.266667, 0.133333, 1)
+text = "💾 ZAPISZ I WYJDŹ DO MENU GŁÓWNEGO"
+
+[node name="ModalInventory" type="Panel" parent="Modals"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -590.0
+offset_top = -300.0
+offset_right = 590.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxMain" type="HBoxContainer" parent="Modals/ModalInventory"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 12.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="EquipmentPanel" type="VBoxContainer" parent="Modals/ModalInventory/HBoxMain"]
+custom_minimum_size = Vector2(460, 0)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="EqTitle" type="Label" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
+theme_override_font_sizes/font_size = 17
+text = "WYPOSAŻENIE POSTACI & ARTEFAKTY"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel"]
+layout_mode = 2
+
+[node name="HBoxColumns" type="HBoxContainer" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="FuncVBox" type="VBoxContainer" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="TitleFunc" type="Label" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0627451, 0.72549, 0.505882, 1)
+theme_override_font_sizes/font_size = 13
+text = "🛡️ EKWIPUNEK (STATYSTYKI)"
+
+[node name="HelmetSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+text = "🪖 Hełm: [Pusty]"
+
+[node name="MaskSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+text = "😷 Maska: [Pusty]"
+
+[node name="ArmorSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+text = "🛡️ Pancerz: [Pusty]"
+
+[node name="BootsSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+text = "🥾 Buty: [Pusty]"
+
+[node name="BackpackSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.980392, 0.752941, 0.141176, 1)
+text = "🎒 Plecak: Plecak"
+
+[node name="CosmVBox" type="VBoxContainer" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="TitleCosm" type="Label" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/CosmVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.658824, 0.333333, 0.968627, 1)
+theme_override_font_sizes/font_size = 13
+text = "🎨 KOSMETYKA (TYLKO WYGLĄD)"
+
+[node name="CosmHelmetSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/CosmVBox"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+text = "🎨 Hełm (Kosmetyczny)"
+
+[node name="CosmMaskSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/CosmVBox"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+text = "🎨 Maska (Kosmetyczna)"
+
+[node name="CosmArmorSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/CosmVBox"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+text = "🎨 Pancerz (Kosmetyczny)"
+
+[node name="CosmBootsSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/CosmVBox"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+text = "🎨 Buty (Kosmetyczne)"
+
+[node name="ArtifactTitle" type="Label" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.658824, 0.333333, 0.968627, 1)
+theme_override_font_sizes/font_size = 13
+text = "🔮 SLORY NA ARTEFAKTY (BUFFY & DEBUFFY)"
+
+[node name="ArtifactHBox" type="HBoxContainer" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ArtSlot1" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/ArtifactHBox"]
+custom_minimum_size = Vector2(80, 50)
+layout_mode = 2
+text = "🔮 #1"
+
+[node name="ArtSlot2" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/ArtifactHBox"]
+custom_minimum_size = Vector2(80, 50)
+layout_mode = 2
+text = "🔮 #2"
+
+[node name="ArtSlot3" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/ArtifactHBox"]
+custom_minimum_size = Vector2(80, 50)
+layout_mode = 2
+text = "🔮 #3"
+
+[node name="ArtSlot4" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/ArtifactHBox"]
+custom_minimum_size = Vector2(80, 50)
+layout_mode = 2
+text = "🔮 #4"
+
+[node name="ArtSlot5" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/ArtifactHBox"]
+custom_minimum_size = Vector2(80, 50)
+layout_mode = 2
+text = "🔮 #5"
+
+[node name="CapacityLabel" type="Label" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0627451, 0.72549, 0.505882, 1)
+theme_override_font_sizes/font_size = 14
+text = "Pojemność: 20 / 20 Slotów"
+horizontal_alignment = 1
+
+[node name="InventoryPanel" type="VBoxContainer" parent="Modals/ModalInventory/HBoxMain"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="Modals/ModalInventory/HBoxMain/InventoryPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.658824, 0.333333, 0.968627, 1)
+theme_override_font_sizes/font_size = 18
+text = "PLECAK ZWIADOWCY [I] (PPM = MENU KONTEKSTOWE)"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Modals/ModalInventory/HBoxMain/InventoryPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="Modals/ModalInventory/HBoxMain/InventoryPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 5
+
+[node name="ModalCrafting" type="Panel" parent="Modals"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -260.0
+offset_right = 480.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Modals/ModalCrafting"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 15.0
+offset_bottom = 45.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.980392, 0.752941, 0.141176, 1)
+theme_override_font_sizes/font_size = 20
+text = "RZEMIOSŁO I ZAAWANSOWANE MEBLE [C]"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Modals/ModalCrafting"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 55.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CraftingScroll" type="ScrollContainer" parent="Modals/ModalCrafting/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="CraftingMargin" type="MarginContainer" parent="Modals/ModalCrafting/VBoxContainer/CraftingScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_right = 25
+
+[node name="CraftingVBox" type="VBoxContainer" parent="Modals/ModalCrafting/VBoxContainer/CraftingScroll/CraftingMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="ModalPortal" type="Panel" parent="Modals"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -340.0
+offset_top = -240.0
+offset_right = 340.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Modals/ModalPortal"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 15.0
+offset_bottom = 45.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "🌀 KONFIGURATOR PORTALU KWANTOWEGO"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Modals/ModalPortal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 55.0
+offset_right = -24.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="HBoxBiome" type="HBoxContainer" parent="Modals/ModalPortal/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Modals/ModalPortal/VBoxContainer/HBoxBiome"]
+layout_mode = 2
+text = "🪐 Wybór Biom / Strefy:"
+
+[node name="BiomeOption" type="OptionButton" parent="Modals/ModalPortal/VBoxContainer/HBoxBiome"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxSeed" type="HBoxContainer" parent="Modals/ModalPortal/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Modals/ModalPortal/VBoxContainer/HBoxSeed"]
+layout_mode = 2
+text = "🧬 Seed (Współrzędne):"
+
+[node name="SeedEdit" type="LineEdit" parent="Modals/ModalPortal/VBoxContainer/HBoxSeed"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "133742"
+
+[node name="RandomSeedBtn" type="Button" parent="Modals/ModalPortal/VBoxContainer/HBoxSeed"]
+layout_mode = 2
+text = "🎲 Losuj Seed"
+
+[node name="InfoBox" type="PanelContainer" parent="Modals/ModalPortal/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InfoLabel" type="Label" parent="Modals/ModalPortal/VBoxContainer/InfoBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98, 0.75, 0.14, 1)
+theme_override_font_sizes/font_size = 13
+text = "Zasięg: Powierzchnia Marsa | Niestabilność: 5% | Tier Łupu: III"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxActions" type="HBoxContainer" parent="Modals/ModalPortal/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ApplyBtn" type="Button" parent="Modals/ModalPortal/VBoxContainer/HBoxActions"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "⚙️ DOSTROJ PORTAL"
+
+[node name="JumpBtn" type="Button" parent="Modals/ModalPortal/VBoxContainer/HBoxActions"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🚀 ROZPOCZNIJ SKOK"
+
+[node name="ModalMap" type="Panel" parent="Modals"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -240.0
+offset_right = 300.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Modals/ModalMap"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 15.0
+offset_bottom = 45.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.0627451, 0.72549, 0.505882, 1)
+theme_override_font_sizes/font_size = 20
+text = "MAPA ZWIADOWCZA GPS [M]"
+horizontal_alignment = 1
+
+[node name="ModalNpcQuest" type="Panel" parent="Modals"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NpcTitle" type="Label" parent="Modals/ModalNpcQuest"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 15.0
+offset_bottom = 45.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "📜 KAPITAN SCOUT - ZADANIA POBOCZNE"
+horizontal_alignment = 1
+
+[node name="QuestVBox" type="VBoxContainer" parent="Modals/ModalNpcQuest"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 55.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="ModalNpcMerchant" type="Panel" parent="Modals"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -220.0
+offset_right = 320.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MerchantTitle" type="Label" parent="Modals/ModalNpcMerchant"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 15.0
+offset_bottom = 45.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.980392, 0.752941, 0.141176, 1)
+theme_override_font_sizes/font_size = 20
+text = "🛒 HANDLARZ STACJI"
+horizontal_alignment = 1
+
+[node name="MerchantVBox" type="VBoxContainer" parent="Modals/ModalNpcMerchant"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 55.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[connection signal="pressed" from="Modals/ModalPause/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_pressed"]

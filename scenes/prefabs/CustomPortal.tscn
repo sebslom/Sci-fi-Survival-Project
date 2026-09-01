@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/CustomPortal.gd" id="1_custom_portal"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_ring"]
+inner_radius = 1.4
+outer_radius = 1.8
+
+[sub_resource type="StandardMaterial3D" id="Mat_Ring"]
+albedo_color = Color(0.15, 0.2, 0.28, 1)
+metallic = 0.9
+roughness = 0.3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vortex"]
+top_radius = 1.35
+bottom_radius = 1.35
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="Mat_Vortex"]
+transparency = 1
+albedo_color = Color(0, 0.95, 1, 0.75)
+emission_enabled = true
+emission = Color(0, 0.95, 1, 1)
+emission_energy_multiplier = 3.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_portal"]
+radius = 2.0
+
+[node name="CustomPortal" type="Area3D"]
+script = ExtResource("1_custom_portal")
+
+[node name="RingMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("TorusMesh_ring")
+surface_material_override/0 = SubResource("Mat_Ring")
+
+[node name="VortexMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_vortex")
+material_override = SubResource("Mat_Vortex")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_portal")
+
+[node name="PortalLight" type="OmniLight3D" parent="."]
+light_color = Color(0, 0.95, 1, 1)
+light_energy = 3.5
+omni_range = 10.0

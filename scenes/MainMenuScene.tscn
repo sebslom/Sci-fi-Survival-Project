@@ -1,0 +1,349 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_menu"]
+[ext_resource type="Material" path="res://assets/materials/pbr_martian_sand.tres" id="2_sand"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ground"]
+material = ExtResource("2_sand")
+size = Vector3(100, 0.5, 100)
+
+[sub_resource type="TorusMesh" id="TorusMesh_portal"]
+inner_radius = 2.0
+outer_radius = 2.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_portal"]
+albedo_color = Color(0, 0.952941, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.952941, 1, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_top_color = Color(0.12, 0.04, 0.02, 1)
+sky_horizon_color = Color(0.85, 0.35, 0.15, 1)
+ground_bottom_color = Color(0.2, 0.08, 0.04, 1)
+ground_horizon_color = Color(0.85, 0.35, 0.15, 1)
+
+[sub_resource type="Sky" id="Sky_martian"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_menu"]
+background_mode = 2
+sky = SubResource("Sky_martian")
+ambient_light_color = Color(0.9, 0.4, 0.2, 1)
+ambient_light_sky_contribution = 0.5
+glow_enabled = true
+glow_intensity = 2.0
+
+[sub_resource type="Gradient" id="Gradient_overlay"]
+colors = PackedColorArray(0.0235294, 0.0627451, 0.117647, 0.85, 0.0235294, 0.0627451, 0.117647, 0.4)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_overlay"]
+gradient = SubResource("Gradient_overlay")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[node name="MainMenuScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
+environment = SubResource("Environment_menu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 20, 0)
+light_color = Color(1, 0.752941, 0.501961, 1)
+light_energy = 1.8
+
+[node name="GroundMesh" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("BoxMesh_ground")
+
+[node name="PortalMesh" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.0, -12)
+mesh = SubResource("TorusMesh_portal")
+surface_material_override/0 = SubResource("StandardMaterial3D_portal")
+
+[node name="PortalLight" type="OmniLight3D" parent="SubViewportContainer/SubViewport/PortalMesh"]
+light_color = Color(0, 0.952941, 1, 1)
+light_energy = 4.0
+omni_range = 15.0
+
+[node name="CameraPivot" type="Node3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3.5, 14)
+fov = 65.0
+
+[node name="OverlayGradient" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_overlay")
+expand_mode = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
+theme_override_font_sizes/font_size = 36
+text = "Sci-Fi Survival Project"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.980392, 0.752941, 0.141176, 1)
+theme_override_font_sizes/font_size = 15
+text = "MARS SURVIVAL & EXPEDITIONS"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HostButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0627451, 0.72549, 0.505882, 1)
+theme_override_font_sizes/font_size = 17
+text = "🚀 New Game / Host Session"
+
+[node name="LoadButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.980392, 0.752941, 0.141176, 1)
+theme_override_font_sizes/font_size = 17
+text = "📂 Load Base & Character Save"
+
+[node name="JoinButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
+theme_override_font_sizes/font_size = 17
+text = "🔗 Join Session (Multiplayer)"
+
+[node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "⚙️ Audio & Graphic Settings"
+
+[node name="ControlsButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.980392, 0.752941, 0.141176, 1)
+theme_override_font_sizes/font_size = 16
+text = "🎮 Controls & Help"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.266667, 0.266667, 1)
+theme_override_font_sizes/font_size = 16
+text = "❌ Exit"
+
+[node name="JoinDialog" type="Window" parent="."]
+title = "Join Session"
+position = Vector2i(0, 36)
+size = Vector2i(400, 260)
+visible = false
+translucent = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="JoinDialog"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="LabelIP" type="Label" parent="JoinDialog/VBoxContainer"]
+layout_mode = 2
+text = "Host Server IP Address:"
+
+[node name="IPInput" type="LineEdit" parent="JoinDialog/VBoxContainer"]
+layout_mode = 2
+text = "127.0.0.1"
+
+[node name="LabelPort" type="Label" parent="JoinDialog/VBoxContainer"]
+layout_mode = 2
+text = "Server Port:"
+
+[node name="PortInput" type="LineEdit" parent="JoinDialog/VBoxContainer"]
+layout_mode = 2
+text = "8910"
+
+[node name="ConfirmJoinButton" type="Button" parent="JoinDialog/VBoxContainer"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
+text = "🔗 CONNECT & JOIN GAME"
+
+[node name="CloseJoinBtn" type="Button" parent="JoinDialog/VBoxContainer"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "❌ CLOSE WINDOW"
+
+[node name="ControlsDialog" type="Window" parent="."]
+title = "Controls & Help"
+position = Vector2i(0, 36)
+size = Vector2i(480, 360)
+visible = false
+translucent = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ControlsDialog"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="ControlsDialog/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "🎮 SCOUT CONTROLS:"
+
+[node name="TextEdit" type="TextEdit" parent="ControlsDialog/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "[WASD] - Character Movement
+[SHIFT] - Sprint
+[SPACE] - Jump
+[RMB] - Optical Scope Zoom
+[LMB] - Fire Weapon / Place Base Building
+[E] - Interact with Portal / Machines / NPCs
+[R] - Reload / Clear Weapon Jam
+[I] - Inventory & Paperdoll / Artifacts
+[C] - Crafting & Base Workbench
+[M] - GPS Map
+[L] - Scout Log Journal
+[P / ESC] - Pause Menu, Multiplayer & Save"
+editable = false
+wrap_mode = 1
+
+[node name="CloseControlsBtn" type="Button" parent="ControlsDialog/VBoxContainer"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+text = "❌ CLOSE WINDOW"
+
+[node name="SettingsDialog" type="Window" parent="."]
+title = "Audio & Graphic Settings"
+position = Vector2i(0, 36)
+size = Vector2i(440, 300)
+visible = false
+translucent = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsDialog"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 20.0
+offset_right = -25.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="VolumeBox" type="VBoxContainer" parent="SettingsDialog/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsDialog/VBoxContainer/VolumeBox"]
+layout_mode = 2
+text = "🔊 Master Volume:"
+
+[node name="VolumeSlider" type="HSlider" parent="SettingsDialog/VBoxContainer/VolumeBox"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="PixelBox" type="VBoxContainer" parent="SettingsDialog/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsDialog/VBoxContainer/PixelBox"]
+layout_mode = 2
+text = "👾 3D Render Scale / Pixelation:"
+
+[node name="PixelSlider" type="HSlider" parent="SettingsDialog/VBoxContainer/PixelBox"]
+layout_mode = 2
+min_value = 0.25
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="ResBox" type="VBoxContainer" parent="SettingsDialog/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsDialog/VBoxContainer/ResBox"]
+layout_mode = 2
+text = "🖥️ Window Resolution:"
+
+[node name="ResolutionOption" type="OptionButton" parent="SettingsDialog/VBoxContainer/ResBox"]
+layout_mode = 2
+
+[node name="CloseSettingsBtn" type="Button" parent="SettingsDialog/VBoxContainer"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+text = "❌ CLOSE WINDOW"
+
+[connection signal="close_requested" from="JoinDialog" to="." method="_on_dialog_close_requested"]
+[connection signal="close_requested" from="ControlsDialog" to="." method="_on_dialog_close_requested"]
+[connection signal="close_requested" from="SettingsDialog" to="." method="_on_dialog_close_requested"]
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="JoinDialog/VBoxContainer/ConfirmJoinButton" to="." method="_on_confirm_join_pressed"]
+[connection signal="pressed" from="JoinDialog/VBoxContainer/CloseJoinBtn" to="." method="_on_dialog_close_requested"]
+[connection signal="pressed" from="ControlsDialog/VBoxContainer/CloseControlsBtn" to="." method="_on_dialog_close_requested"]
+[connection signal="pressed" from="SettingsDialog/VBoxContainer/CloseSettingsBtn" to="." method="_on_dialog_close_requested"]

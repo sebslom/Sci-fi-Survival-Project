@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/Crystal.gd" id="1_crystal"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_crystal"]
+size = Vector3(1.4, 2.2, 1.4)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Crystal"]
+albedo_color = Color(0.06, 0.95, 0.6, 1)
+emission_enabled = true
+emission = Color(0.06, 0.95, 0.6, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="BoxShape3D" id="Shape_Crystal"]
+size = Vector3(1.4, 2.2, 1.4)
+
+[node name="CrystalClusterPrefab" type="Node3D"]
+
+[node name="CrystalMain" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+script = ExtResource("1_crystal")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CrystalMain"]
+mesh = SubResource("PrismMesh_crystal")
+surface_material_override/0 = SubResource("Mat_Crystal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrystalMain"]
+shape = SubResource("Shape_Crystal")
+
+[node name="CrystalSide1" type="StaticBody3D" parent="."]
+transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, -1.8, 0.9, 0.8)
+script = ExtResource("1_crystal")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CrystalSide1"]
+mesh = SubResource("PrismMesh_crystal")
+surface_material_override/0 = SubResource("Mat_Crystal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrystalSide1"]
+shape = SubResource("Shape_Crystal")
+
+[node name="CrystalSide2" type="StaticBody3D" parent="."]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, 1.8, 0.9, -0.8)
+script = ExtResource("1_crystal")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CrystalSide2"]
+mesh = SubResource("PrismMesh_crystal")
+surface_material_override/0 = SubResource("Mat_Crystal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrystalSide2"]
+shape = SubResource("Shape_Crystal")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+light_color = Color(0.06, 0.95, 0.6, 1)
+light_energy = 3.0
+omni_range = 10.0

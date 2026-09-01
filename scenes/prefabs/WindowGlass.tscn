@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/BaseWindow.gd" id="1_win"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_glass"]
+size = Vector3(1.4, 1.4, 0.08)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_glass"]
+transparency = 1
+albedo_color = Color(0.2, 0.75, 1.0, 0.35)
+roughness = 0.1
+metallic = 0.9
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_glass"]
+size = Vector3(1.4, 1.4, 0.08)
+
+[node name="WindowGlass" type="StaticBody3D" groups=["placed_structure", "window"]]
+script = ExtResource("1_win")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_glass")
+surface_material_override/0 = SubResource("StandardMaterial3D_glass")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_glass")

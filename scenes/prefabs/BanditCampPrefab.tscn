@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_enemy"]
+[ext_resource type="Script" path="res://scripts/LootChest.gd" id="2_chest"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_Wall"]
+albedo_color = Color(0.2, 0.25, 0.35, 1)
+roughness = 0.6
+
+[sub_resource type="BoxMesh" id="Mesh_Wall"]
+material = SubResource("Mat_Wall")
+size = Vector3(8, 3.5, 8)
+
+[sub_resource type="BoxShape3D" id="Shape_Wall"]
+size = Vector3(8, 3.5, 8)
+
+[sub_resource type="BoxMesh" id="Mesh_Enemy"]
+size = Vector3(1.4, 1.4, 1.4)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Enemy"]
+albedo_color = Color(0.93, 0.26, 0.26, 1)
+
+[sub_resource type="BoxShape3D" id="Shape_Enemy"]
+size = Vector3(1.4, 1.4, 1.4)
+
+[node name="BanditCampPrefab" type="Node3D"]
+
+[node name="CampShelter" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CampShelter"]
+mesh = SubResource("Mesh_Wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CampShelter"]
+shape = SubResource("Shape_Wall")
+
+[node name="BanditGuard1" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.7, 5)
+script = ExtResource("1_enemy")
+enemy_name = "Bandyta Strażnik"
+enemy_type = "bandit_assault"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BanditGuard1"]
+mesh = SubResource("Mesh_Enemy")
+surface_material_override/0 = SubResource("Mat_Enemy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BanditGuard1"]
+shape = SubResource("Shape_Enemy")
+
+[node name="BanditGuard2" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.7, -5)
+script = ExtResource("1_enemy")
+enemy_name = "Bandyta Ciężki Pancerz"
+enemy_type = "bandit_heavy"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BanditGuard2"]
+mesh = SubResource("Mesh_Enemy")
+surface_material_override/0 = SubResource("Mat_Enemy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BanditGuard2"]
+shape = SubResource("Shape_Enemy")
+
+[node name="CampChest" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 3)
+script = ExtResource("2_chest")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CampChest"]
+mesh = SubResource("Mesh_Enemy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CampChest"]
+shape = SubResource("Shape_Enemy")

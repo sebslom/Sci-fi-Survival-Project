@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/InteractableItem3D.gd" id="1_item"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_item"]
+size = Vector3(0.4, 0.25, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_item"]
+albedo_color = Color(0.58, 0.64, 0.72, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_item"]
+size = Vector3(0.4, 0.25, 0.4)
+
+[node name="InteractableItem3D" type="RigidBody3D" groups=["interactable", "interactive", "physical_item"]]
+mass = 1.5
+script = ExtResource("1_item")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_item")
+surface_material_override/0 = SubResource("StandardMaterial3D_item")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_item")

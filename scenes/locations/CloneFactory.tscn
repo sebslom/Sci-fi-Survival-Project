@@ -1,0 +1,200 @@
+[gd_scene load_steps=19 format=3]
+
+[ext_resource type="Script" path="res://scripts/CloneFactoryArenaManager.gd" id="1_arena"]
+[ext_resource type="Script" path="res://scripts/Portal.gd" id="2_portal"]
+[ext_resource type="Script" path="res://scripts/WorldEnvironmentManager.gd" id="3_env"]
+[ext_resource type="Script" path="res://scripts/GoliatBoss.gd" id="4_goliat"]
+[ext_resource type="Script" path="res://scripts/DNAConsole.gd" id="5_dna"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_Floor"]
+albedo_color = Color(0.08, 0.1, 0.14, 1)
+roughness = 0.4
+metallic = 0.8
+
+[sub_resource type="BoxMesh" id="Mesh_Floor"]
+material = SubResource("Mat_Floor")
+size = Vector3(60, 0.2, 60)
+
+[sub_resource type="BoxShape3D" id="Shape_Floor"]
+size = Vector3(60, 0.2, 60)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Wall"]
+albedo_color = Color(0.12, 0.16, 0.22, 1)
+roughness = 0.5
+metallic = 0.7
+
+[sub_resource type="BoxMesh" id="Mesh_Wall"]
+material = SubResource("Mat_Wall")
+size = Vector3(60, 8, 1)
+
+[sub_resource type="BoxShape3D" id="Shape_Wall"]
+size = Vector3(60, 8, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Vat"]
+transparency = 1
+albedo_color = Color(0.86, 0.15, 0.15, 0.6)
+emission_enabled = true
+emission = Color(0.86, 0.15, 0.15, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="CylinderMesh" id="Mesh_CloneVat"]
+top_radius = 1.2
+bottom_radius = 1.2
+height = 3.2
+
+[sub_resource type="CapsuleMesh" id="Mesh_Goliat"]
+radius = 1.6
+height = 4.2
+
+[sub_resource type="StandardMaterial3D" id="Mat_Goliat"]
+albedo_color = Color(0.15, 0.2, 0.28, 1)
+metallic = 0.95
+roughness = 0.15
+emission_enabled = true
+emission = Color(0.86, 0.15, 0.15, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="CapsuleShape3D" id="Shape_GoliatCol"]
+radius = 1.6
+height = 4.2
+
+[sub_resource type="TorusMesh" id="Mesh_PortalRing"]
+inner_radius = 1.2
+outer_radius = 1.5
+
+[sub_resource type="StandardMaterial3D" id="Mat_Portal"]
+albedo_color = Color(0.86, 0.15, 0.15, 1)
+emission_enabled = true
+emission = Color(0.86, 0.15, 0.15, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="SphereShape3D" id="Shape_PortalCol"]
+radius = 2.0
+
+[node name="CloneFactory" type="Node3D"]
+script = ExtResource("1_arena")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+script = ExtResource("3_env")
+
+[node name="MainFloor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, -0.1, 30)
+mesh = SubResource("Mesh_Floor")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MainFloor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainFloor/StaticBody3D"]
+shape = SubResource("Shape_Floor")
+
+[node name="FacilityWalls" type="Node3D" parent="."]
+
+[node name="NorthWall" type="MeshInstance3D" parent="FacilityWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 4.0, 0)
+mesh = SubResource("Mesh_Wall")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="FacilityWalls/NorthWall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FacilityWalls/NorthWall/StaticBody3D"]
+shape = SubResource("Shape_Wall")
+
+[node name="SouthWall" type="MeshInstance3D" parent="FacilityWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 4.0, 60)
+mesh = SubResource("Mesh_Wall")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="FacilityWalls/SouthWall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FacilityWalls/SouthWall/StaticBody3D"]
+shape = SubResource("Shape_Wall")
+
+[node name="WestWall" type="MeshInstance3D" parent="FacilityWalls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 4.0, 30)
+mesh = SubResource("Mesh_Wall")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="FacilityWalls/WestWall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FacilityWalls/WestWall/StaticBody3D"]
+shape = SubResource("Shape_Wall")
+
+[node name="EastWall" type="MeshInstance3D" parent="FacilityWalls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 60, 4.0, 30)
+mesh = SubResource("Mesh_Wall")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="FacilityWalls/EastWall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FacilityWalls/EastWall/StaticBody3D"]
+shape = SubResource("Shape_Wall")
+
+[node name="IncubationSector" type="Node3D" parent="."]
+
+[node name="Vat1" type="MeshInstance3D" parent="IncubationSector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1.6, 15)
+mesh = SubResource("Mesh_CloneVat")
+surface_material_override/0 = SubResource("Mat_Vat")
+
+[node name="Vat2" type="MeshInstance3D" parent="IncubationSector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 1.6, 15)
+mesh = SubResource("Mesh_CloneVat")
+surface_material_override/0 = SubResource("Mat_Vat")
+
+[node name="Vat3" type="MeshInstance3D" parent="IncubationSector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 1.6, 15)
+mesh = SubResource("Mesh_CloneVat")
+surface_material_override/0 = SubResource("Mat_Vat")
+
+[node name="Vat4" type="MeshInstance3D" parent="IncubationSector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 1.6, 15)
+mesh = SubResource("Mesh_CloneVat")
+surface_material_override/0 = SubResource("Mat_Vat")
+
+[node name="DNATerminal" type="StaticBody3D" parent="IncubationSector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.9, 30)
+script = ExtResource("5_dna")
+
+[node name="Label3D" type="Label3D" parent="IncubationSector/DNATerminal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+billboard = 1
+text = "🧬 TERMINAL EKSTRAKCJI DNA [E]"
+modulate = Color(0, 0.95, 1, 1)
+
+[node name="BossArena" type="Node3D" parent="."]
+
+[node name="CloneBoss" type="CharacterBody3D" parent="BossArena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 2.1, 20)
+script = ExtResource("4_goliat")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BossArena/CloneBoss"]
+mesh = SubResource("Mesh_Goliat")
+surface_material_override/0 = SubResource("Mat_Goliat")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BossArena/CloneBoss"]
+shape = SubResource("Shape_GoliatCol")
+
+[node name="BossLight" type="OmniLight3D" parent="BossArena/CloneBoss"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+light_color = Color(0.86, 0.15, 0.15, 1)
+light_energy = 4.0
+omni_range = 14.0
+
+[node name="Label3D" type="Label3D" parent="BossArena/CloneBoss"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
+billboard = 1
+text = "👹 Prototyp \"GOLIAT\" (Hardcore Boss)
+[HP: 800 / 800]"
+modulate = Color(0.86, 0.15, 0.15, 1)
+
+[node name="AirlockPortal" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 1.2, 54)
+script = ExtResource("2_portal")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AirlockPortal"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("Mesh_PortalRing")
+surface_material_override/0 = SubResource("Mat_Portal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AirlockPortal"]
+shape = SubResource("Shape_PortalCol")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="AirlockPortal"]
+light_color = Color(0.86, 0.15, 0.15, 1)
+light_energy = 3.0
+omni_range = 8.0

@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/Umbrella.gd" id="1_umbrella"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_metal"]
+albedo_color = Color(0.3, 0.3, 0.35, 1.0)
+metallic = 0.9
+roughness = 0.3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pole"]
+material = SubResource("StandardMaterial3D_metal")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 2.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_canopy"]
+albedo_color = Color(0.9, 0.2, 0.1, 1.0)
+roughness = 0.7
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_closed"]
+material = SubResource("StandardMaterial3D_canopy")
+top_radius = 0.08
+bottom_radius = 0.2
+height = 1.6
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_open"]
+material = SubResource("StandardMaterial3D_canopy")
+top_radius = 0.1
+bottom_radius = 1.4
+height = 0.6
+
+[node name="Umbrella" type="StaticBody3D"]
+script = ExtResource("1_umbrella")
+
+[node name="Pole" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+mesh = SubResource("CylinderMesh_pole")
+
+[node name="MeshClosed" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+mesh = SubResource("CylinderMesh_closed")
+
+[node name="MeshOpen" type="MeshInstance3D" parent="."]
+visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0, 0)
+mesh = SubResource("CylinderMesh_open")

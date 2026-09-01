@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/Enemy.gd" id="1"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_crater"]
+top_radius = 6.0
+bottom_radius = 4.0
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_crater"]
+albedo_color = Color(0.35, 0.15, 0.1, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_bug"]
+size = Vector3(0.8, 0.6, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bug"]
+albedo_color = Color(0.2, 0.8, 0.3, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bug"]
+size = Vector3(0.8, 0.6, 0.8)
+
+[node name="CraterPrefab" type="Node3D"]
+
+[node name="CraterFloor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+mesh = SubResource("CylinderMesh_crater")
+surface_material_override/0 = SubResource("StandardMaterial3D_crater")
+
+[node name="SpaceBug1" type="CharacterBody3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -2, 0.3, -1)
+script = ExtResource("1")
+enemy_name = "Kosmiczny Robal"
+enemy_type = "bug"
+
+[node name="MeshInstance" type="MeshInstance3D" parent="SpaceBug1"]
+mesh = SubResource("BoxMesh_bug")
+surface_material_override/0 = SubResource("StandardMaterial3D_bug")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpaceBug1"]
+shape = SubResource("BoxShape3D_bug")
+
+[node name="SpaceBug2" type="CharacterBody3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 2, 0.3, 1)
+script = ExtResource("1")
+enemy_name = "Kosmiczny Robal"
+enemy_type = "bug"
+
+[node name="MeshInstance" type="MeshInstance3D" parent="SpaceBug2"]
+mesh = SubResource("BoxMesh_bug")
+surface_material_override/0 = SubResource("StandardMaterial3D_bug")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpaceBug2"]
+shape = SubResource("BoxShape3D_bug")
+
+[node name="SpaceBug3" type="CharacterBody3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.3, 3)
+script = ExtResource("1")
+enemy_name = "Kosmiczny Robal"
+enemy_type = "bug"
+
+[node name="MeshInstance" type="MeshInstance3D" parent="SpaceBug3"]
+mesh = SubResource("BoxMesh_bug")
+surface_material_override/0 = SubResource("StandardMaterial3D_bug")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpaceBug3"]
+shape = SubResource("BoxShape3D_bug")

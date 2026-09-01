@@ -1,0 +1,210 @@
+[gd_scene load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://scripts/ShelterBaseController.gd" id="1_controller"]
+[ext_resource type="Script" path="res://scripts/Portal.gd" id="2_portal"]
+[ext_resource type="Script" path="res://scripts/HydroponicsTable.gd" id="3_hydro"]
+[ext_resource type="Script" path="res://scripts/RecyclingStation.gd" id="4_recycler"]
+[ext_resource type="Material" path="res://assets/materials/pbr_shelter_floor.tres" id="6_pbr_floor"]
+[ext_resource type="Script" path="res://scripts/WorldEnvironmentManager.gd" id="7_env"]
+
+[sub_resource type="BoxMesh" id="Mesh_MainFloor"]
+material = ExtResource("6_pbr_floor")
+size = Vector3(40, 0.2, 40)
+
+[sub_resource type="BoxShape3D" id="Shape_MainFloor"]
+size = Vector3(40, 0.2, 40)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Wall"]
+albedo_color = Color(0.18, 0.22, 0.28, 1)
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="Mesh_Wall"]
+material = SubResource("Mat_Wall")
+size = Vector3(40, 5, 1)
+
+[sub_resource type="BoxShape3D" id="Shape_Wall"]
+size = Vector3(40, 5, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_Dome"]
+radius = 42.0
+height = 42.0
+is_hemisphere = true
+
+[sub_resource type="StandardMaterial3D" id="Mat_Forcefield"]
+transparency = 1
+albedo_color = Color(0, 0.95, 1, 0.35)
+emission_enabled = true
+emission = Color(0, 0.95, 1, 1)
+emission_energy_multiplier = 0.6
+rim_enabled = true
+rim = 0.8
+roughness = 0.1
+
+[sub_resource type="BoxShape3D" id="BoxShape_DomeWallNS"]
+size = Vector3(50, 30, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape_DomeWallEW"]
+size = Vector3(2, 30, 50)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Console"]
+albedo_color = Color(0.05, 0.15, 0.25, 1)
+
+[sub_resource type="TorusMesh" id="Mesh_PortalRing"]
+inner_radius = 1.2
+outer_radius = 1.5
+
+[sub_resource type="StandardMaterial3D" id="Mat_Portal"]
+albedo_color = Color(0, 0.95, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.95, 1, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="SphereShape3D" id="SphereShape_PortalCol"]
+radius = 2.0
+
+[node name="Shelter" type="Node3D"]
+script = ExtResource("1_controller")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+script = ExtResource("7_env")
+glow_intensity = 2.2
+glow_bloom_threshold = 0.65
+
+[node name="ForcefieldDome" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 20)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ForcefieldDome"]
+mesh = SubResource("SphereMesh_Dome")
+surface_material_override/0 = SubResource("Mat_Forcefield")
+
+[node name="ColNorth" type="CollisionShape3D" parent="ForcefieldDome"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, -21)
+shape = SubResource("BoxShape_DomeWallNS")
+
+[node name="ColSouth" type="CollisionShape3D" parent="ForcefieldDome"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 21)
+shape = SubResource("BoxShape_DomeWallNS")
+
+[node name="ColEast" type="CollisionShape3D" parent="ForcefieldDome"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 10, 0)
+shape = SubResource("BoxShape_DomeWallEW")
+
+[node name="ColWest" type="CollisionShape3D" parent="ForcefieldDome"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 10, 0)
+shape = SubResource("BoxShape_DomeWallEW")
+
+[node name="MainFloor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -0.1, 20)
+mesh = SubResource("Mesh_MainFloor")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MainFloor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainFloor/StaticBody3D"]
+shape = SubResource("Shape_MainFloor")
+
+[node name="Walls" type="Node3D" parent="."]
+
+[node name="NorthWall" type="MeshInstance3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 2.5, 0)
+mesh = SubResource("Mesh_Wall")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Walls/NorthWall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/NorthWall/StaticBody3D"]
+shape = SubResource("Shape_Wall")
+
+[node name="SouthWall" type="MeshInstance3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 2.5, 40)
+mesh = SubResource("Mesh_Wall")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Walls/SouthWall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/SouthWall/StaticBody3D"]
+shape = SubResource("Shape_Wall")
+
+[node name="WestWall" type="MeshInstance3D" parent="Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2.5, 20)
+mesh = SubResource("Mesh_Wall")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Walls/WestWall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/WestWall/StaticBody3D"]
+shape = SubResource("Shape_Wall")
+
+[node name="EastWall" type="MeshInstance3D" parent="Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 40, 2.5, 20)
+mesh = SubResource("Mesh_Wall")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Walls/EastWall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/EastWall/StaticBody3D"]
+shape = SubResource("Shape_Wall")
+
+[node name="PowerSubstation" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.8, 6)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PowerSubstation"]
+material_override = SubResource("Mat_Console")
+
+[node name="LogisticsModules" type="Node3D" parent="."]
+
+[node name="HydroponicsTable" type="StaticBody3D" parent="LogisticsModules"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.7, 24)
+script = ExtResource("3_hydro")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LogisticsModules/HydroponicsTable"]
+
+[node name="Label3D" type="Label3D" parent="LogisticsModules/HydroponicsTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+billboard = 1
+text = "🌱 STÓŁ HYDROPONICZNY [E]"
+modulate = Color(0, 0.95, 1, 1)
+
+[node name="RecyclingStation" type="StaticBody3D" parent="LogisticsModules"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.7, 24)
+script = ExtResource("4_recycler")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LogisticsModules/RecyclingStation"]
+
+[node name="Label3D" type="Label3D" parent="LogisticsModules/RecyclingStation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+billboard = 1
+text = "⚙️ STACJA RECYKLINGU [E]"
+modulate = Color(0, 0.95, 1, 1)
+
+[node name="CeilingLights" type="Node3D" parent="."]
+
+[node name="Light1" type="OmniLight3D" parent="CeilingLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 4.0, 10)
+light_color = Color(0.22, 0.74, 0.97, 1)
+light_energy = 1.8
+omni_range = 16.0
+
+[node name="Light2" type="OmniLight3D" parent="CeilingLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 4.0, 20)
+light_color = Color(0.22, 0.74, 0.97, 1)
+light_energy = 1.8
+omni_range = 18.0
+
+[node name="Light3" type="OmniLight3D" parent="CeilingLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 4.0, 30)
+light_color = Color(0.22, 0.74, 0.97, 1)
+light_energy = 1.8
+omni_range = 16.0
+
+[node name="Portal" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1.2, 35)
+script = ExtResource("2_portal")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Portal"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("Mesh_PortalRing")
+surface_material_override/0 = SubResource("Mat_Portal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Portal"]
+shape = SubResource("SphereShape_PortalCol")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Portal"]
+light_color = Color(0, 0.95, 1, 1)
+light_energy = 2.5
+omni_range = 8.0

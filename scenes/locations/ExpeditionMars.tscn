@@ -1,0 +1,123 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://scripts/ExpeditionMars.gd" id="1_mars"]
+[ext_resource type="Script" path="res://scripts/Portal.gd" id="2_portal"]
+[ext_resource type="Script" path="res://scripts/Crystal.gd" id="3_crystal"]
+[ext_resource type="Script" path="res://scripts/Enemy.gd" id="4_enemy"]
+[ext_resource type="Material" path="res://assets/materials/pbr_martian_sand.tres" id="5_sand"]
+[ext_resource type="Script" path="res://scripts/ColonyGenerator.gd" id="6_gen"]
+[ext_resource type="Script" path="res://scripts/ExpeditionEnemySpawner.gd" id="7_spawner"]
+[ext_resource type="Script" path="res://scripts/MapDecoratorGenerator.gd" id="8_decorator"]
+[ext_resource type="Script" path="res://scripts/DayNightCycle.gd" id="9_daynight"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+material = ExtResource("5_sand")
+size = Vector3(400, 0.2, 400)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(400, 0.2, 400)
+
+[sub_resource type="PrismMesh" id="PrismMesh_crystal"]
+size = Vector3(1.2, 1.6, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_crystal"]
+albedo_color = Color(0.0627451, 0.72549, 0.505882, 1)
+emission_enabled = true
+emission = Color(0.0627451, 0.72549, 0.505882, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_crystal"]
+size = Vector3(1.2, 1.6, 1.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_enemy"]
+size = Vector3(1.4, 1.4, 1.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_enemy"]
+albedo_color = Color(0.937255, 0.266667, 0.266667, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_enemy"]
+size = Vector3(1.4, 1.4, 1.4)
+
+[sub_resource type="TorusMesh" id="TorusMesh_portal"]
+inner_radius = 1.2
+outer_radius = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_portal"]
+albedo_color = Color(0, 0.952941, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.952941, 1, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_portal"]
+radius = 2.5
+
+[node name="ExpeditionMars" type="Node3D"]
+script = ExtResource("1_mars")
+
+[node name="Terrain" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("BoxMesh_floor")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/StaticBody3D"]
+shape = SubResource("BoxShape3D_floor")
+
+[node name="ColonyGenerator" type="Node3D" parent="."]
+script = ExtResource("6_gen")
+
+[node name="Crystal1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.8, 20)
+script = ExtResource("3_crystal")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crystal1"]
+mesh = SubResource("PrismMesh_crystal")
+surface_material_override/0 = SubResource("StandardMaterial3D_crystal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crystal1"]
+shape = SubResource("BoxShape3D_crystal")
+
+[node name="Crystal2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0.8, 45)
+script = ExtResource("3_crystal")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crystal2"]
+mesh = SubResource("PrismMesh_crystal")
+surface_material_override/0 = SubResource("StandardMaterial3D_crystal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crystal2"]
+shape = SubResource("BoxShape3D_crystal")
+
+[node name="EnemySlime" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 0.7, 55)
+script = ExtResource("4_enemy")
+enemy_name = "Kwasowy Slime"
+
+[node name="MeshInstance" type="MeshInstance3D" parent="EnemySlime"]
+mesh = SubResource("BoxMesh_enemy")
+surface_material_override/0 = SubResource("StandardMaterial3D_enemy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemySlime"]
+shape = SubResource("BoxShape3D_enemy")
+
+[node name="Portal" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 10)
+script = ExtResource("2_portal")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Portal"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("TorusMesh_portal")
+surface_material_override/0 = SubResource("StandardMaterial3D_portal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Portal"]
+shape = SubResource("SphereShape3D_portal")
+
+[node name="ExpeditionEnemySpawner" type="Node3D" parent="."]
+script = ExtResource("7_spawner")
+
+[node name="MapDecoratorGenerator" type="Node3D" parent="."]
+script = ExtResource("8_decorator")
+
+[node name="SunLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 50, 0)
+shadow_enabled = true
+script = ExtResource("9_daynight")

@@ -1,0 +1,96 @@
+[gd_scene load_steps=15 format=3]
+
+[ext_resource type="Script" path="res://scripts/Portal.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/Crystal.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/Enemy.gd" id="3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
+albedo_color = Color(0.22, 0.15, 0.1, 1)
+roughness = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+material = SubResource("StandardMaterial3D_floor")
+size = Vector3(45, 0.2, 45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(45, 0.2, 45)
+
+[sub_resource type="PrismMesh" id="PrismMesh_crystal"]
+size = Vector3(1.2, 1.6, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_crystal"]
+albedo_color = Color(0.98, 0.75, 0.14, 1)
+emission_enabled = true
+emission = Color(0.98, 0.75, 0.14, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_crystal"]
+size = Vector3(1.2, 1.6, 1.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_enemy"]
+size = Vector3(1.4, 1.4, 1.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_enemy"]
+albedo_color = Color(0.66, 0.33, 0.97, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_enemy"]
+size = Vector3(1.4, 1.4, 1.4)
+
+[sub_resource type="TorusMesh" id="TorusMesh_portal"]
+inner_radius = 1.0
+outer_radius = 1.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_portal"]
+albedo_color = Color(0, 0.952941, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.952941, 1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_portal"]
+radius = 2.0
+
+[node name="ExpeditionCanyon" type="Node3D"]
+
+[node name="Terrain" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, -0.1, 22.5)
+mesh = SubResource("BoxMesh_floor")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/StaticBody3D"]
+shape = SubResource("BoxShape3D_floor")
+
+[node name="CrystalGold" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.8, 15)
+script = ExtResource("2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CrystalGold"]
+mesh = SubResource("PrismMesh_crystal")
+surface_material_override/0 = SubResource("StandardMaterial3D_crystal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrystalGold"]
+shape = SubResource("BoxShape3D_crystal")
+
+[node name="EnemySteelker" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.7, 20)
+script = ExtResource("3")
+enemy_name = "Xenomorf Steelker"
+hp = 65
+
+[node name="MeshInstance" type="MeshInstance3D" parent="EnemySteelker"]
+mesh = SubResource("BoxMesh_enemy")
+surface_material_override/0 = SubResource("StandardMaterial3D_enemy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemySteelker"]
+shape = SubResource("BoxShape3D_enemy")
+
+[node name="Portal" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 1.2, 40)
+script = ExtResource("1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Portal"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("TorusMesh_portal")
+surface_material_override/0 = SubResource("StandardMaterial3D_portal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Portal"]
+shape = SubResource("SphereShape3D_portal")

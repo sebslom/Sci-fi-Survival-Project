@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_MinesSoil"]
+albedo_color = Color(0.1, 0.12, 0.15, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_GasVent"]
+albedo_color = Color(0.5, 0.8, 0.1, 0.5)
+transparency = 1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape_Gas"]
+height = 4.0
+radius = 6.0
+
+[node name="ExpeditionMines" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+
+[node name="ColonyGenerator" type="Node3D" parent="."]
+script = load("res://scripts/ColonyGenerator.gd")
+building_count = 8
+chest_count = 5
+enemy_count = 10
+
+[node name="ToxicGasVentGrade2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, -20)
+script = load("res://scripts/FiltrationGasArea.gd")
+required_filtration_grade = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToxicGasVentGrade2"]
+shape = SubResource("CylinderShape_Gas")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ToxicGasVentGrade2"]
+material_override = SubResource("Mat_GasVent")
+
+[node name="ToxicGasVentGrade3" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 1, 30)
+script = load("res://scripts/FiltrationGasArea.gd")
+required_filtration_grade = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToxicGasVentGrade3"]
+shape = SubResource("CylinderShape_Gas")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ToxicGasVentGrade3"]
+material_override = SubResource("Mat_GasVent")
+
+[node name="Player" parent="." instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
