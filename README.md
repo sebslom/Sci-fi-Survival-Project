@@ -12,6 +12,10 @@ An open-source, feature-rich **3D Sci-Fi Survival FPS Game Template** built in G
 **Sci-Fi Survival Project** is a 3D first-person planetary survival game template set on a harsh alien world. Players explore hostile surface biomes, scavenge resources, manage survival status effects, craft tactical equipment, and return to their base before atmospheric emission waves hit the surface.
 
 This codebase is released as an open-source starter template and learning resource for the Godot development community.
+<img width="80%" alt="Menu" src="https://github.com/user-attachments/assets/9cb8a50f-642f-4730-a887-4854b9cc705e" />
+<img width="80%" alt="game3" src="https://github.com/user-attachments/assets/08228c0e-73b1-4183-8e8b-25db1c72474e" />
+<img width="80%" alt="game2" src="https://github.com/user-attachments/assets/a4def5e2-c10c-4416-a5b2-877da0de5468" />
+<img width="80%" alt="game1" src="https://github.com/user-attachments/assets/08edfa6d-f903-4251-bac3-29b902377021" />
 
 ---
 
