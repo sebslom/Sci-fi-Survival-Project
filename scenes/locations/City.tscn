@@ -111,7 +111,7 @@ shape = SubResource("CapsuleShape3D_npc")
 
 [node name="Label3D" type="Label3D" parent="NpcArmsDealer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
-text = "🔫 HANDLARZ BRONIĄ [E]\n(Zakup Amunicji)"
+text = "🔫 WEAPONS MERCHANT [E]\n(Zakup Amunicji)"
 modulate = Color(0.937255, 0.266667, 0.266667, 1)
 
 [node name="Portal" type="Area3D" parent="."]

@@ -235,7 +235,7 @@ func _update_active_item_widget():
 	if not active_slot:
 		if active_item_icon: active_item_icon.text = "✋"
 		if active_item_count: active_item_count.text = "-"
-		if active_item_name: active_item_name.text = "Dłonie [" + str(GameManager.active_hotbar_slot) + "]"
+		if active_item_name: active_item_name.text = "Hands [" + str(GameManager.active_hotbar_slot) + "]"
 		return
 
 	if active_item_icon: active_item_icon.text = active_slot.get("icon", "📦")

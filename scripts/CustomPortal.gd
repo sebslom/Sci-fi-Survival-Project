@@ -1,7 +1,7 @@
 class_name CustomPortal extends Area3D
 
-@export var portal_name: String = "Stacjonarny Portal Kwantowy"
-@export var target_scene_path: String = "" # Hardcoded scene path for DLC/Special portals (e.g. "res://scenes/locations/CloneFactory.tscn")
+@export var portal_name: String = "Stationary Quantum Portal"
+@export var target_scene_path: String = "" # Hardcoded scene path for DLC/Special portals
 @export var bypass_procedural_seed: bool = false # True for hardcoded non-procedural mission portals
 @export var target_biome: String = "mars" # "mars", "canyon", "ice", "town", "custom", "clone_factory", "bazar"
 @export var custom_seed: int = 133742
@@ -55,9 +55,11 @@ func tune_portal(biome: String, target_seed: int):
 	custom_seed = target_seed
 	_update_portal_visuals()
 	if GameManager:
-		GameManager.add_log("Portal", "🌀 Dostrojono portal [%s] do biomu [%s] z seedem #%d" % [portal_name, biome.to_upper(), target_seed])
+		GameManager.add_log("Portal", "🌀 Tuned portal [%s] to biome [%s] with seed #%d" % [portal_name, biome.to_upper(), target_seed])
 
 func get_interaction_prompt() -> String:
+	if target_scene_path == "res://scenes/locations/Shelter.tscn" or target_biome == "house":
+		return "[E] Enter: Return Portal to Base 🌀"
 	if bypass_procedural_seed or not target_scene_path.is_empty():
 		return "[E] Enter: %s 🌀" % portal_name
 	var biome_title = target_biome.to_upper()
@@ -70,7 +72,7 @@ func _on_body_entered(body):
 func interact():
 	if is_teleporting: return
 	
-	if bypass_procedural_seed or not target_scene_path.is_empty():
+	if target_scene_path == "res://scenes/locations/Shelter.tscn" or target_biome == "house" or bypass_procedural_seed or not target_scene_path.is_empty():
 		execute_jump()
 	else:
 		var hud_nodes = get_tree().get_nodes_in_group("hud")
@@ -86,13 +88,16 @@ func execute_jump():
 	if SoundManager: SoundManager.play_teleport()
 
 	if GameManager:
-		if bypass_procedural_seed or not target_scene_path.is_empty():
+		if target_scene_path == "res://scenes/locations/Shelter.tscn" or target_biome == "house":
+			GameManager.add_log("Portal", "🌀 Activating Return Portal -> Returning to Tactical Base Shelter...")
+			GameManager.travel_to("house")
+		elif bypass_procedural_seed or not target_scene_path.is_empty():
 			var scene_to_load = target_scene_path
 			if scene_to_load.is_empty():
 				if target_biome == "clone_factory": scene_to_load = "res://scenes/locations/CloneFactory.tscn"
 				elif target_biome == "bazar": scene_to_load = "res://scenes/locations/MerchantHub.tscn"
 
-			GameManager.add_log("Portal", "🌀 Aktywacja Portalu Dedykowanego -> %s..." % portal_name)
+			GameManager.add_log("Portal", "🌀 Activating Dedicated Portal -> %s..." % portal_name)
 			GameManager.travel_to_custom_scene(scene_to_load)
 		else:
 			GameManager.current_expedition_seed = custom_seed
@@ -102,7 +107,7 @@ func execute_jump():
 			elif target_biome == "town": dest_scene = "res://scenes/locations/City.tscn"
 
 			GameManager.current_expedition_scene = dest_scene
-			GameManager.add_log("Portal", "🌀 Otwieranie Tunelu Podprzestrzennego -> Biom: %s (Seed: #%d)..." % [target_biome.to_upper(), custom_seed])
+			GameManager.add_log("Portal", "🌀 Opening Subspace Tunnel -> Biome: %s (Seed: #%d)..." % [target_biome.to_upper(), custom_seed])
 
 			if GameManager.active_location == "house":
 				GameManager.travel_to("expedition")

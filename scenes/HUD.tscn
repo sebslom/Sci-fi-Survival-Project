@@ -1,11 +1,12 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://dqc245u1svqcp"]
 
-[ext_resource type="Script" path="res://scripts/HUD.gd" id="1"]
+[ext_resource type="Script" uid="uid://ccqdrbeaso0qh" path="res://scripts/HUD.gd" id="1"]
 
-[node name="HUD" type="CanvasLayer" groups=["hud"]]
+[node name="HUD" type="CanvasLayer" unique_id=1589873921 groups=["hud"]]
+layer = 10
 script = ExtResource("1")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1341955377]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,14 +15,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="HeaderLeftPanel" type="Panel" parent="Control"]
+[node name="HeaderLeftPanel" type="Panel" parent="Control" unique_id=675920478]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 15.0
 offset_right = 260.0
 offset_bottom = 55.0
 
-[node name="LocationLabel" type="Label" parent="Control/HeaderLeftPanel"]
+[node name="LocationLabel" type="Label" parent="Control/HeaderLeftPanel" unique_id=169779294]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,11 +31,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
 theme_override_font_sizes/font_size = 15
-text = "SCHRON TAKTYCZNY"
+text = "TACTICAL SHELTER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HeaderRightPanel" type="Panel" parent="Control"]
+[node name="HeaderRightPanel" type="Panel" parent="Control" unique_id=246346581]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -45,7 +46,7 @@ offset_right = -20.0
 offset_bottom = 55.0
 grow_horizontal = 0
 
-[node name="TimerLabel" type="Label" parent="Control/HeaderRightPanel"]
+[node name="TimerLabel" type="Label" parent="Control/HeaderRightPanel" unique_id=1657063650]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,11 +55,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 0.266667, 0.133333, 1)
 theme_override_font_sizes/font_size = 14
-text = "☄️ EMISJA: 05:00"
+text = "☄️ EMISSION: 05:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PowerStatusPanel" type="Panel" parent="Control"]
+[node name="PowerStatusPanel" type="Panel" parent="Control" unique_id=334164098]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -69,7 +70,7 @@ offset_right = -20.0
 offset_bottom = 92.0
 grow_horizontal = 0
 
-[node name="PowerLabel" type="Label" parent="Control/PowerStatusPanel"]
+[node name="PowerLabel" type="Label" parent="Control/PowerStatusPanel" unique_id=1853768607]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -82,7 +83,7 @@ text = "⚡ Power Grid: 30.0 kW / 15.0 kW [ONLINE 🟢]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VitalsMarginContainer" type="MarginContainer" parent="Control"]
+[node name="VitalsMarginContainer" type="MarginContainer" parent="Control" unique_id=1059875264]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -97,10 +98,10 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VitalsPanel" type="Panel" parent="Control/VitalsMarginContainer"]
+[node name="VitalsPanel" type="Panel" parent="Control/VitalsMarginContainer" unique_id=1231064560]
 layout_mode = 2
 
-[node name="Margin" type="MarginContainer" parent="Control/VitalsMarginContainer/VitalsPanel"]
+[node name="Margin" type="MarginContainer" parent="Control/VitalsMarginContainer/VitalsPanel" unique_id=655707380]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -112,63 +113,63 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VitalsVBox" type="VBoxContainer" parent="Control/VitalsMarginContainer/VitalsPanel/Margin"]
+[node name="VitalsVBox" type="VBoxContainer" parent="Control/VitalsMarginContainer/VitalsPanel/Margin" unique_id=2035819990]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="HPBox" type="VBoxContainer" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox"]
+[node name="HPBox" type="VBoxContainer" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox" unique_id=162208835]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="HPText" type="Label" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox/HPBox"]
+[node name="HPText" type="Label" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox/HPBox" unique_id=1008504898]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.0627451, 0.72549, 0.505882, 1)
 theme_override_font_sizes/font_size = 13
 text = "HP: 100 / 100"
 
-[node name="SuitBox" type="VBoxContainer" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox"]
+[node name="SuitBox" type="VBoxContainer" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox" unique_id=1376894819]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="SuitText" type="Label" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox/SuitBox"]
+[node name="SuitText" type="Label" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox/SuitBox" unique_id=1960942515]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.95, 1, 1)
 theme_override_font_sizes/font_size = 13
-text = "Skafander: 100% 🛡️"
+text = "Suit: 100% 🛡️"
 
-[node name="WeightText" type="Label" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox"]
+[node name="WeightText" type="Label" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox" unique_id=895790729]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.658824, 0.333333, 0.968627, 1)
 theme_override_font_sizes/font_size = 13
 text = "Weight: 38.5 / 60.0 kg (64%) 🎒"
 
-[node name="HungerBox" type="VBoxContainer" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox"]
+[node name="HungerBox" type="VBoxContainer" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox" unique_id=1869048942]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="HungerText" type="Label" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox/HungerBox"]
+[node name="HungerText" type="Label" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox/HungerBox" unique_id=598860786]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.960784, 0.623529, 0.0431373, 1)
 theme_override_font_sizes/font_size = 13
 text = "Hunger: 100 / 100"
 
-[node name="ThirstBox" type="VBoxContainer" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox"]
+[node name="ThirstBox" type="VBoxContainer" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox" unique_id=1875563594]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="ThirstText" type="Label" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox/ThirstBox"]
+[node name="ThirstText" type="Label" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox/ThirstBox" unique_id=495648731]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.235294, 0.51, 0.964706, 1)
 theme_override_font_sizes/font_size = 13
-text = "Pragnienie: 100 / 100"
+text = "Thirst: 100 / 100"
 
-[node name="GoldText" type="Label" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox"]
+[node name="GoldText" type="Label" parent="Control/VitalsMarginContainer/VitalsPanel/Margin/VitalsVBox" unique_id=974333901]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.980392, 0.752941, 0.141176, 1)
 theme_override_font_sizes/font_size = 13
 text = "Gold: 150 💰"
 
-[node name="ActiveItemBottomRightPanel" type="Panel" parent="Control"]
+[node name="ActiveItemBottomRightPanel" type="Panel" parent="Control" unique_id=24157]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -182,7 +183,7 @@ offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/ActiveItemBottomRightPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ActiveItemBottomRightPanel" unique_id=1153928398]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -195,11 +196,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 2
 
-[node name="HBoxTop" type="HBoxContainer" parent="Control/ActiveItemBottomRightPanel/VBoxContainer"]
+[node name="HBoxTop" type="HBoxContainer" parent="Control/ActiveItemBottomRightPanel/VBoxContainer" unique_id=405516055]
 layout_mode = 2
 alignment = 1
 
-[node name="IconLabel" type="Label" parent="Control/ActiveItemBottomRightPanel/VBoxContainer/HBoxTop"]
+[node name="IconLabel" type="Label" parent="Control/ActiveItemBottomRightPanel/VBoxContainer/HBoxTop" unique_id=1055487969]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
@@ -207,7 +208,7 @@ text = "🔫"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CountLabel" type="Label" parent="Control/ActiveItemBottomRightPanel/VBoxContainer/HBoxTop"]
+[node name="CountLabel" type="Label" parent="Control/ActiveItemBottomRightPanel/VBoxContainer/HBoxTop" unique_id=2079542513]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.980392, 0.752941, 0.141176, 1)
@@ -215,22 +216,22 @@ theme_override_font_sizes/font_size = 16
 text = "999 / 999"
 vertical_alignment = 1
 
-[node name="NameLabel" type="Label" parent="Control/ActiveItemBottomRightPanel/VBoxContainer"]
+[node name="NameLabel" type="Label" parent="Control/ActiveItemBottomRightPanel/VBoxContainer" unique_id=936650836]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
 theme_override_font_sizes/font_size = 14
 text = "Laser Pistol [1]"
 horizontal_alignment = 1
 
-[node name="ToggleLogButton" type="Button" parent="Control"]
+[node name="ToggleLogButton" type="Button" parent="Control" unique_id=1665744840]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 65.0
 offset_right = 150.0
 offset_bottom = 98.0
-text = "📜 Dziennik [L]"
+text = "📜 Log [L]"
 
-[node name="LogPanel" type="Panel" parent="Control"]
+[node name="LogPanel" type="Panel" parent="Control" unique_id=382941059]
 visible = false
 layout_mode = 0
 offset_left = 20.0
@@ -238,7 +239,7 @@ offset_top = 105.0
 offset_right = 320.0
 offset_bottom = 360.0
 
-[node name="LogBox" type="VBoxContainer" parent="Control/LogPanel"]
+[node name="LogBox" type="VBoxContainer" parent="Control/LogPanel" unique_id=1753629122]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -250,19 +251,19 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Title" type="Label" parent="Control/LogPanel/LogBox"]
+[node name="Title" type="Label" parent="Control/LogPanel/LogBox" unique_id=1315886809]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.584314, 0.639216, 0.721569, 1)
 text = "DZIENNIK ZWIADOWCY [L]"
 
-[node name="TextEdit" type="TextEdit" parent="Control/LogPanel/LogBox"]
+[node name="TextEdit" type="TextEdit" parent="Control/LogPanel/LogBox" unique_id=1678720357]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 12
 editable = false
 wrap_mode = 1
 
-[node name="Crosshair" type="Label" parent="Control"]
+[node name="Crosshair" type="Label" parent="Control" unique_id=2061069251]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -281,7 +282,7 @@ text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TargetInspectLabel" type="Label" parent="Control"]
+[node name="TargetInspectLabel" type="Label" parent="Control" unique_id=1662420204]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -302,10 +303,10 @@ theme_override_font_sizes/font_size = 13
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NotificationLabel" type="Label" parent="Control"]
+[node name="NotificationLabel" type="Label" parent="Control" unique_id=2012326665]
 visible = false
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.15
 anchor_right = 0.5
@@ -320,7 +321,7 @@ text = "Powiadomienie..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Modals" type="Control" parent="."]
+[node name="Modals" type="Control" parent="." unique_id=128662367]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -329,7 +330,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ModalPause" type="Panel" parent="Modals"]
+[node name="ModalPause" type="Panel" parent="Modals" unique_id=2063036959]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -344,7 +345,7 @@ offset_bottom = 280.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Title" type="Label" parent="Modals/ModalPause"]
+[node name="Title" type="Label" parent="Modals/ModalPause" unique_id=1393594564]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -353,10 +354,10 @@ offset_bottom = 38.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
 theme_override_font_sizes/font_size = 18
-text = "Sci-Fi Survival Project - MENU PAUZY & MULTIPLAYER [P]"
+text = "Sci-Fi Survival Project - PAUSE MENU & MULTIPLAYER [P]"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Modals/ModalPause"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Modals/ModalPause" unique_id=173169278]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -369,131 +370,131 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
 
-[node name="HBoxCustom" type="HBoxContainer" parent="Modals/ModalPause/VBoxContainer"]
+[node name="HBoxCustom" type="HBoxContainer" parent="Modals/ModalPause/VBoxContainer" unique_id=2119056452]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="NickBox" type="VBoxContainer" parent="Modals/ModalPause/VBoxContainer/HBoxCustom"]
+[node name="NickBox" type="VBoxContainer" parent="Modals/ModalPause/VBoxContainer/HBoxCustom" unique_id=407590326]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Modals/ModalPause/VBoxContainer/HBoxCustom/NickBox"]
+[node name="Label" type="Label" parent="Modals/ModalPause/VBoxContainer/HBoxCustom/NickBox" unique_id=57302274]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.06, 0.95, 0.6, 1)
-text = "👤 Nick Gracza:"
+text = "👤 Nick:"
 
-[node name="NickEdit" type="LineEdit" parent="Modals/ModalPause/VBoxContainer/HBoxCustom/NickBox"]
+[node name="NickEdit" type="LineEdit" parent="Modals/ModalPause/VBoxContainer/HBoxCustom/NickBox" unique_id=141283538]
 layout_mode = 2
-text = "Zwiadowca_Alpha"
+text = "Soldier_Alpha"
 
-[node name="ModelBox" type="VBoxContainer" parent="Modals/ModalPause/VBoxContainer/HBoxCustom"]
+[node name="ModelBox" type="VBoxContainer" parent="Modals/ModalPause/VBoxContainer/HBoxCustom" unique_id=228342166]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Modals/ModalPause/VBoxContainer/HBoxCustom/ModelBox"]
+[node name="Label" type="Label" parent="Modals/ModalPause/VBoxContainer/HBoxCustom/ModelBox" unique_id=1339823281]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65, 0.33, 0.96, 1)
-text = "🎽 Model Postaci 3D:"
+text = "🎽 Model 3D:"
 
-[node name="ModelOption" type="OptionButton" parent="Modals/ModalPause/VBoxContainer/HBoxCustom/ModelBox"]
+[node name="ModelOption" type="OptionButton" parent="Modals/ModalPause/VBoxContainer/HBoxCustom/ModelBox" unique_id=1365241248]
 layout_mode = 2
 
-[node name="MultiplayerBox" type="VBoxContainer" parent="Modals/ModalPause/VBoxContainer"]
+[node name="MultiplayerBox" type="VBoxContainer" parent="Modals/ModalPause/VBoxContainer" unique_id=2005698709]
 layout_mode = 2
 
-[node name="MpTitle" type="Label" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox"]
+[node name="MpTitle" type="Label" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox" unique_id=1205531110]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.98, 0.75, 0.14, 1)
 text = "🌐 MULTIPLAYER LOBBY & ROOM"
 
-[node name="HBoxMp" type="HBoxContainer" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox"]
+[node name="HBoxMp" type="HBoxContainer" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox" unique_id=115464825]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="RoomLabel" type="Label" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox/HBoxMp"]
+[node name="RoomLabel" type="Label" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox/HBoxMp" unique_id=2133574542]
 layout_mode = 2
 text = "Room: MARS-7829"
 
-[node name="PrivateCheck" type="CheckBox" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox/HBoxMp"]
+[node name="PrivateCheck" type="CheckBox" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox/HBoxMp" unique_id=1263464643]
 layout_mode = 2
 button_pressed = true
 text = "Serwer Prywatny"
 
-[node name="PassEdit" type="LineEdit" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox/HBoxMp"]
+[node name="PassEdit" type="LineEdit" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox/HBoxMp" unique_id=1344217040]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
-placeholder_text = "Password"
 text = "1337"
+placeholder_text = "Password"
 
-[node name="PlayersLabel" type="Label" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox"]
+[node name="PlayersLabel" type="Label" parent="Modals/ModalPause/VBoxContainer/MultiplayerBox" unique_id=1383242528]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.58, 0.63, 0.72, 1)
 theme_override_font_sizes/font_size = 12
 text = "Gracze w pokoju (1/4): Zwiadowca_Alpha (Host)"
 
-[node name="VolumeBox" type="VBoxContainer" parent="Modals/ModalPause/VBoxContainer"]
+[node name="VolumeBox" type="VBoxContainer" parent="Modals/ModalPause/VBoxContainer" unique_id=441943864]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Modals/ModalPause/VBoxContainer/VolumeBox"]
+[node name="Label" type="Label" parent="Modals/ModalPause/VBoxContainer/VolumeBox" unique_id=116323477]
 layout_mode = 2
 text = "🔊 Audio Volume:"
 
-[node name="VolumeSlider" type="HSlider" parent="Modals/ModalPause/VBoxContainer/VolumeBox"]
+[node name="VolumeSlider" type="HSlider" parent="Modals/ModalPause/VBoxContainer/VolumeBox" unique_id=309980002]
 layout_mode = 2
 max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="PixelBox" type="VBoxContainer" parent="Modals/ModalPause/VBoxContainer"]
+[node name="PixelBox" type="VBoxContainer" parent="Modals/ModalPause/VBoxContainer" unique_id=687825423]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Modals/ModalPause/VBoxContainer/PixelBox"]
+[node name="Label" type="Label" parent="Modals/ModalPause/VBoxContainer/PixelBox" unique_id=2067383892]
 layout_mode = 2
-text = "👾 Skalowanie 3D / Pikselizacja:"
+text = "👾 Scale 3D / Pixel :"
 
-[node name="PixelSlider" type="HSlider" parent="Modals/ModalPause/VBoxContainer/PixelBox"]
+[node name="PixelSlider" type="HSlider" parent="Modals/ModalPause/VBoxContainer/PixelBox" unique_id=923004216]
 layout_mode = 2
 min_value = 0.25
 max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="ResBox" type="VBoxContainer" parent="Modals/ModalPause/VBoxContainer"]
+[node name="ResBox" type="VBoxContainer" parent="Modals/ModalPause/VBoxContainer" unique_id=850249001]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Modals/ModalPause/VBoxContainer/ResBox"]
+[node name="Label" type="Label" parent="Modals/ModalPause/VBoxContainer/ResBox" unique_id=123192711]
 layout_mode = 2
 text = "🖥️ Window Resolution:"
 
-[node name="ResolutionOption" type="OptionButton" parent="Modals/ModalPause/VBoxContainer/ResBox"]
+[node name="ResolutionOption" type="OptionButton" parent="Modals/ModalPause/VBoxContainer/ResBox" unique_id=402510678]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="Modals/ModalPause/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Modals/ModalPause/VBoxContainer" unique_id=591019718]
 layout_mode = 2
 
-[node name="HBoxSaveLoad" type="HBoxContainer" parent="Modals/ModalPause/VBoxContainer"]
+[node name="HBoxSaveLoad" type="HBoxContainer" parent="Modals/ModalPause/VBoxContainer" unique_id=1401872965]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="SaveBtn" type="Button" parent="Modals/ModalPause/VBoxContainer/HBoxSaveLoad"]
+[node name="SaveBtn" type="Button" parent="Modals/ModalPause/VBoxContainer/HBoxSaveLoad" unique_id=1150693648]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "💾 SAVE BASE & CHARACTER"
 
-[node name="LoadBtn" type="Button" parent="Modals/ModalPause/VBoxContainer/HBoxSaveLoad"]
+[node name="LoadBtn" type="Button" parent="Modals/ModalPause/VBoxContainer/HBoxSaveLoad" unique_id=2053902121]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "📂 WCZYTAJ STAN GRY"
+text = "📂 LOAD GAME"
 
-[node name="MainMenuButton" type="Button" parent="Modals/ModalPause/VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="Modals/ModalPause/VBoxContainer" unique_id=596769120]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.266667, 0.133333, 1)
 text = "💾 SAVE & EXIT TO MAIN MENU"
 
-[node name="ModalInventory" type="Panel" parent="Modals"]
+[node name="ModalInventory" type="Panel" parent="Modals" unique_id=2062972816]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -508,7 +509,7 @@ offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxMain" type="HBoxContainer" parent="Modals/ModalInventory"]
+[node name="HBoxMain" type="HBoxContainer" parent="Modals/ModalInventory" unique_id=70392748]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -521,158 +522,158 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
 
-[node name="EquipmentPanel" type="VBoxContainer" parent="Modals/ModalInventory/HBoxMain"]
+[node name="EquipmentPanel" type="VBoxContainer" parent="Modals/ModalInventory/HBoxMain" unique_id=491691978]
 custom_minimum_size = Vector2(460, 0)
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="EqTitle" type="Label" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel"]
+[node name="EqTitle" type="Label" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel" unique_id=1381059784]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
 theme_override_font_sizes/font_size = 17
 text = "CHARACTER EQUIPMENT & ARTIFACTS"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel"]
+[node name="HSeparator" type="HSeparator" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel" unique_id=790108476]
 layout_mode = 2
 
-[node name="HBoxColumns" type="HBoxContainer" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel"]
+[node name="HBoxColumns" type="HBoxContainer" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel" unique_id=60364502]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="FuncVBox" type="VBoxContainer" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns"]
+[node name="FuncVBox" type="VBoxContainer" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns" unique_id=690335288]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 6
 
-[node name="TitleFunc" type="Label" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox"]
+[node name="TitleFunc" type="Label" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox" unique_id=1597232582]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.0627451, 0.72549, 0.505882, 1)
 theme_override_font_sizes/font_size = 13
-text = "🛡️ EKWIPUNEK (STATYSTYKI)"
+text = "🛡️ EQUIPMENT (STATS)"
 
-[node name="HelmetSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox"]
+[node name="HelmetSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox" unique_id=688239228]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 text = "🪖 Helmet: [Empty]"
 
-[node name="MaskSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox"]
+[node name="MaskSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox" unique_id=697968824]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
-text = "😷 Maska: [Pusty]"
+text = "😷 Mask: [Empty]"
 
-[node name="ArmorSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox"]
+[node name="ArmorSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox" unique_id=827577747]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
-text = "🛡️ Pancerz: [Pusty]"
+text = "🛡️ Armor: [Empty]"
 
-[node name="BootsSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox"]
+[node name="BootsSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox" unique_id=473069326]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
-text = "🥾 Buty: [Pusty]"
+text = "🥾 Shoes: [Empty]"
 
-[node name="BackpackSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox"]
+[node name="BackpackSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/FuncVBox" unique_id=1984747639]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.980392, 0.752941, 0.141176, 1)
-text = "🎒 Plecak: Plecak"
+text = "🎒 BACKPACK: Backpack"
 
-[node name="CosmVBox" type="VBoxContainer" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns"]
+[node name="CosmVBox" type="VBoxContainer" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns" unique_id=1258001439]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 6
 
-[node name="TitleCosm" type="Label" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/CosmVBox"]
+[node name="TitleCosm" type="Label" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/CosmVBox" unique_id=2125875041]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.658824, 0.333333, 0.968627, 1)
 theme_override_font_sizes/font_size = 13
 text = "🎨 COSMETICS (VISUAL ONLY)"
 
-[node name="CosmHelmetSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/CosmVBox"]
+[node name="CosmHelmetSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/CosmVBox" unique_id=852296542]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 text = "🎨 Helmet (Cosmetic)"
 
-[node name="CosmMaskSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/CosmVBox"]
+[node name="CosmMaskSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/CosmVBox" unique_id=1530672271]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
-text = "🎨 Maska (Kosmetyczna)"
+text = "🎨 Mask (Cosmetic)"
 
-[node name="CosmArmorSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/CosmVBox"]
+[node name="CosmArmorSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/CosmVBox" unique_id=379817122]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
-text = "🎨 Pancerz (Kosmetyczny)"
+text = "🎨 Armor (Cosmetic)"
 
-[node name="CosmBootsSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/CosmVBox"]
+[node name="CosmBootsSlot" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/HBoxColumns/CosmVBox" unique_id=207921467]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
-text = "🎨 Buty (Kosmetyczne)"
+text = "🎨 Shoes: (Cosmetic)"
 
-[node name="ArtifactTitle" type="Label" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel"]
+[node name="ArtifactTitle" type="Label" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel" unique_id=801021311]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.658824, 0.333333, 0.968627, 1)
 theme_override_font_sizes/font_size = 13
-text = "🔮 SLORY NA ARTEFAKTY (BUFFY & DEBUFFY)"
+text = "🔮 SLOTS FOR ARTIFACTS (BUFF & DEBUFF)"
 
-[node name="ArtifactHBox" type="HBoxContainer" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel"]
+[node name="ArtifactHBox" type="HBoxContainer" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel" unique_id=836419015]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="ArtSlot1" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/ArtifactHBox"]
+[node name="ArtSlot1" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/ArtifactHBox" unique_id=1751940471]
 custom_minimum_size = Vector2(80, 50)
 layout_mode = 2
 text = "🔮 #1"
 
-[node name="ArtSlot2" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/ArtifactHBox"]
+[node name="ArtSlot2" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/ArtifactHBox" unique_id=1674653968]
 custom_minimum_size = Vector2(80, 50)
 layout_mode = 2
 text = "🔮 #2"
 
-[node name="ArtSlot3" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/ArtifactHBox"]
+[node name="ArtSlot3" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/ArtifactHBox" unique_id=1056115902]
 custom_minimum_size = Vector2(80, 50)
 layout_mode = 2
 text = "🔮 #3"
 
-[node name="ArtSlot4" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/ArtifactHBox"]
+[node name="ArtSlot4" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/ArtifactHBox" unique_id=1329033920]
 custom_minimum_size = Vector2(80, 50)
 layout_mode = 2
 text = "🔮 #4"
 
-[node name="ArtSlot5" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/ArtifactHBox"]
+[node name="ArtSlot5" type="Button" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel/ArtifactHBox" unique_id=710624841]
 custom_minimum_size = Vector2(80, 50)
 layout_mode = 2
 text = "🔮 #5"
 
-[node name="CapacityLabel" type="Label" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel"]
+[node name="CapacityLabel" type="Label" parent="Modals/ModalInventory/HBoxMain/EquipmentPanel" unique_id=1605693668]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.0627451, 0.72549, 0.505882, 1)
 theme_override_font_sizes/font_size = 14
 text = "Capacity: 20 / 20 Slots"
 horizontal_alignment = 1
 
-[node name="InventoryPanel" type="VBoxContainer" parent="Modals/ModalInventory/HBoxMain"]
+[node name="InventoryPanel" type="VBoxContainer" parent="Modals/ModalInventory/HBoxMain" unique_id=1330620639]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Title" type="Label" parent="Modals/ModalInventory/HBoxMain/InventoryPanel"]
+[node name="Title" type="Label" parent="Modals/ModalInventory/HBoxMain/InventoryPanel" unique_id=1349001189]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.658824, 0.333333, 0.968627, 1)
 theme_override_font_sizes/font_size = 18
-text = "PLECAK ZWIADOWCY [I] (PPM = MENU KONTEKSTOWE)"
+text = "BACKPACK [I] (PPM = CONTEXT MENU)"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Modals/ModalInventory/HBoxMain/InventoryPanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Modals/ModalInventory/HBoxMain/InventoryPanel" unique_id=380019273]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GridContainer" type="GridContainer" parent="Modals/ModalInventory/HBoxMain/InventoryPanel/ScrollContainer"]
+[node name="GridContainer" type="GridContainer" parent="Modals/ModalInventory/HBoxMain/InventoryPanel/ScrollContainer" unique_id=16001102]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 5
 
-[node name="ModalCrafting" type="Panel" parent="Modals"]
+[node name="ModalCrafting" type="Panel" parent="Modals" unique_id=1939905171]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -687,7 +688,7 @@ offset_bottom = 260.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Title" type="Label" parent="Modals/ModalCrafting"]
+[node name="Title" type="Label" parent="Modals/ModalCrafting" unique_id=1499860105]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -699,7 +700,7 @@ theme_override_font_sizes/font_size = 20
 text = "CRAFTING & BASE FURNITURE [C]"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Modals/ModalCrafting"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Modals/ModalCrafting" unique_id=94576352]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -711,22 +712,22 @@ offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CraftingScroll" type="ScrollContainer" parent="Modals/ModalCrafting/VBoxContainer"]
+[node name="CraftingScroll" type="ScrollContainer" parent="Modals/ModalCrafting/VBoxContainer" unique_id=1637592880]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="CraftingMargin" type="MarginContainer" parent="Modals/ModalCrafting/VBoxContainer/CraftingScroll"]
+[node name="CraftingMargin" type="MarginContainer" parent="Modals/ModalCrafting/VBoxContainer/CraftingScroll" unique_id=1907042158]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_right = 25
 
-[node name="CraftingVBox" type="VBoxContainer" parent="Modals/ModalCrafting/VBoxContainer/CraftingScroll/CraftingMargin"]
+[node name="CraftingVBox" type="VBoxContainer" parent="Modals/ModalCrafting/VBoxContainer/CraftingScroll/CraftingMargin" unique_id=841586011]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
-[node name="ModalPortal" type="Panel" parent="Modals"]
+[node name="ModalPortal" type="Panel" parent="Modals" unique_id=901900562]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -741,7 +742,7 @@ offset_bottom = 240.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Title" type="Label" parent="Modals/ModalPortal"]
+[node name="Title" type="Label" parent="Modals/ModalPortal" unique_id=287381557]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -750,10 +751,10 @@ offset_bottom = 45.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
 theme_override_font_sizes/font_size = 20
-text = "🌀 KONFIGURATOR PORTALU KWANTOWEGO"
+text = "🌀 QUANTUM PORTAL CONFIGURATOR"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Modals/ModalPortal"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Modals/ModalPortal" unique_id=383759905]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -766,38 +767,38 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 12
 
-[node name="HBoxBiome" type="HBoxContainer" parent="Modals/ModalPortal/VBoxContainer"]
+[node name="HBoxBiome" type="HBoxContainer" parent="Modals/ModalPortal/VBoxContainer" unique_id=1187331065]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Modals/ModalPortal/VBoxContainer/HBoxBiome"]
+[node name="Label" type="Label" parent="Modals/ModalPortal/VBoxContainer/HBoxBiome" unique_id=676627259]
 layout_mode = 2
 text = "🪐 Biome / Zone Selection:"
 
-[node name="BiomeOption" type="OptionButton" parent="Modals/ModalPortal/VBoxContainer/HBoxBiome"]
+[node name="BiomeOption" type="OptionButton" parent="Modals/ModalPortal/VBoxContainer/HBoxBiome" unique_id=1861054027]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxSeed" type="HBoxContainer" parent="Modals/ModalPortal/VBoxContainer"]
+[node name="HBoxSeed" type="HBoxContainer" parent="Modals/ModalPortal/VBoxContainer" unique_id=53005807]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Modals/ModalPortal/VBoxContainer/HBoxSeed"]
+[node name="Label" type="Label" parent="Modals/ModalPortal/VBoxContainer/HBoxSeed" unique_id=2023333984]
 layout_mode = 2
 text = "🧬 Seed (Coordinates):"
 
-[node name="SeedEdit" type="LineEdit" parent="Modals/ModalPortal/VBoxContainer/HBoxSeed"]
+[node name="SeedEdit" type="LineEdit" parent="Modals/ModalPortal/VBoxContainer/HBoxSeed" unique_id=1216114666]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "133742"
 
-[node name="RandomSeedBtn" type="Button" parent="Modals/ModalPortal/VBoxContainer/HBoxSeed"]
+[node name="RandomSeedBtn" type="Button" parent="Modals/ModalPortal/VBoxContainer/HBoxSeed" unique_id=1670187740]
 layout_mode = 2
-text = "🎲 Losuj Seed"
+text = "🎲 Randomize Seed"
 
-[node name="InfoBox" type="PanelContainer" parent="Modals/ModalPortal/VBoxContainer"]
+[node name="InfoBox" type="PanelContainer" parent="Modals/ModalPortal/VBoxContainer" unique_id=1489467874]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="InfoLabel" type="Label" parent="Modals/ModalPortal/VBoxContainer/InfoBox"]
+[node name="InfoLabel" type="Label" parent="Modals/ModalPortal/VBoxContainer/InfoBox" unique_id=1236729065]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.98, 0.75, 0.14, 1)
 theme_override_font_sizes/font_size = 13
@@ -805,23 +806,23 @@ text = "Range: Planetary Surface | Instability: 5% | Loot Tier: III"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxActions" type="HBoxContainer" parent="Modals/ModalPortal/VBoxContainer"]
+[node name="HBoxActions" type="HBoxContainer" parent="Modals/ModalPortal/VBoxContainer" unique_id=793655573]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="ApplyBtn" type="Button" parent="Modals/ModalPortal/VBoxContainer/HBoxActions"]
+[node name="ApplyBtn" type="Button" parent="Modals/ModalPortal/VBoxContainer/HBoxActions" unique_id=818136532]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "⚙️ DOSTROJ PORTAL"
+text = "⚙️ PORTAL SETUP"
 
-[node name="JumpBtn" type="Button" parent="Modals/ModalPortal/VBoxContainer/HBoxActions"]
+[node name="JumpBtn" type="Button" parent="Modals/ModalPortal/VBoxContainer/HBoxActions" unique_id=127868518]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "🚀 ROZPOCZNIJ SKOK"
+text = "🚀 START THE JUMP"
 
-[node name="ModalMap" type="Panel" parent="Modals"]
+[node name="ModalMap" type="Panel" parent="Modals" unique_id=1634915218]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -836,7 +837,7 @@ offset_bottom = 240.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Title" type="Label" parent="Modals/ModalMap"]
+[node name="Title" type="Label" parent="Modals/ModalMap" unique_id=714734611]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -845,10 +846,10 @@ offset_bottom = 45.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.0627451, 0.72549, 0.505882, 1)
 theme_override_font_sizes/font_size = 20
-text = "MAPA ZWIADOWCZA GPS [M]"
+text = "RECONNAISSANCE MAP GPS [M]"
 horizontal_alignment = 1
 
-[node name="ModalNpcQuest" type="Panel" parent="Modals"]
+[node name="ModalNpcQuest" type="Panel" parent="Modals" unique_id=1919510047]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -863,7 +864,7 @@ offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NpcTitle" type="Label" parent="Modals/ModalNpcQuest"]
+[node name="NpcTitle" type="Label" parent="Modals/ModalNpcQuest" unique_id=26155887]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -872,10 +873,10 @@ offset_bottom = 45.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0.952941, 1, 1)
 theme_override_font_sizes/font_size = 20
-text = "📜 KAPITAN SCOUT - ZADANIA POBOCZNE"
+text = "📜 CAPTAIN SCOUT - SIDE QUESTS"
 horizontal_alignment = 1
 
-[node name="QuestVBox" type="VBoxContainer" parent="Modals/ModalNpcQuest"]
+[node name="QuestVBox" type="VBoxContainer" parent="Modals/ModalNpcQuest" unique_id=2101941453]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -888,7 +889,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 
-[node name="ModalNpcMerchant" type="Panel" parent="Modals"]
+[node name="ModalNpcMerchant" type="Panel" parent="Modals" unique_id=1806308428]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -903,7 +904,7 @@ offset_bottom = 220.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MerchantTitle" type="Label" parent="Modals/ModalNpcMerchant"]
+[node name="MerchantTitle" type="Label" parent="Modals/ModalNpcMerchant" unique_id=1793254553]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -912,10 +913,10 @@ offset_bottom = 45.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.980392, 0.752941, 0.141176, 1)
 theme_override_font_sizes/font_size = 20
-text = "🛒 HANDLARZ STACJI"
+text = "🛒 STATION CLERK"
 horizontal_alignment = 1
 
-[node name="MerchantVBox" type="VBoxContainer" parent="Modals/ModalNpcMerchant"]
+[node name="MerchantVBox" type="VBoxContainer" parent="Modals/ModalNpcMerchant" unique_id=1624691182]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

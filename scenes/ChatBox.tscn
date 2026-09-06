@@ -17,6 +17,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
 [node name="ChatBox" type="CanvasLayer"]
+layer = 5
 script = ExtResource("1_chat")
 
 [node name="Panel" type="Panel" parent="."]

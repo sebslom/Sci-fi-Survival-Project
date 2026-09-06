@@ -70,7 +70,7 @@ func _execute_boss_attack():
 			SurvivalManager.inflict_damage(dmg, false)
 
 		if SoundManager: SoundManager.play_hit()
-		GameManager.add_log("Combat", "💥 BOSS UDERZENIE: -" + str(int(dmg)) + " HP! (Ostrzeżenie: Atak Klonu!)")
+		GameManager.add_log("Combat", "💥 BOSS UDERZENIE: -" + str(int(dmg)) + " HP! (Warning: Clone Attack!)")
 		GameManager.emit_signal("stats_changed")
 
 func take_damage(dmg_amount: int):

@@ -52,7 +52,31 @@ func load_active_location():
 	else:
 		player.global_position = Vector3(20.0, 1.2, 20.0)
 
+	if loc != "house":
+		_spawn_expedition_return_portal()
+
 	clean_debug_meshes()
+
+func _spawn_expedition_return_portal():
+	var existing = get_tree().get_nodes_in_group("return_portal")
+	for p in existing:
+		if is_instance_valid(p):
+			return
+
+	var portal_scene = load("res://scenes/prefabs/CustomPortal.tscn")
+	if portal_scene and current_location_instance:
+		var p_inst = portal_scene.instantiate()
+		p_inst.add_to_group("return_portal")
+		p_inst.portal_name = "Return Portal to Base"
+		p_inst.target_scene_path = "res://scenes/locations/Shelter.tscn"
+		p_inst.bypass_procedural_seed = true
+		p_inst.target_biome = "town"
+		
+		var spawn_pos = player.global_position + Vector3(-3.5, 0.0, 3.5)
+		p_inst.global_position = spawn_pos
+		current_location_instance.add_child(p_inst)
+		if GameManager:
+			GameManager.add_log("Portal", "🌀 Return Portal to Base spawned at " + str(spawn_pos))
 
 func clean_debug_meshes():
 	# 1. Ensure only 1 player node exists in scene tree

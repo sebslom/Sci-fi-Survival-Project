@@ -2,14 +2,20 @@
                     SCI-FI SURVIVAL PROJECT - CHANGELOG
 ==============================================================================
 Engine: Godot Engine 4.6 (GDScript)
-Version: 4.53.0 Building Placement Skipping & Preview Fix
-Release Date: 01.09.2026
+Version: 4.54.0 Expedition Return Portals, CanvasLayer UI Depth & Localization
+Release Date: 06.09.2026
 
 ------------------------------------------------------------------------------
 CHANGES AND UPDATES
 ------------------------------------------------------------------------------
-1. BUILDING PLACEMENT SKIPPING & JITTER FIX:
-   - Added `raycast.add_exception(ghost_mesh_instance)` and `raycast.add_exception(ghost_area)` in `scripts/Player.gd` to prevent interaction raycasts from hitting the ghost preview model.
-   - Added a `placement_cooldown_timer` (0.3s debounce) in `use_active_hotbar_item()` to prevent rapid double-placing and item count skipping on left clicks.
-   - Implemented dynamic ghost preview mesh sizing and collision box updates matching every furniture and structure type.
+1. CHAT UNDER UI WINDOWS & MODALS:
+   - Set `ChatBox.tscn` `layer = 5` and `HUD.tscn` `layer = 10`.
+   - The tactical chat box is now guaranteed to render visually behind Log Journal (`[L]`), Map (`[M]`), Crafting (`[C]`), Inventory (`[I]`), Storage Chests, and Pause Menu windows.
+
+2. AUTOMATIC EXPEDITION RETURN PORTALS:
+   - Added `_spawn_expedition_return_portal()` in `scripts/MainScene.gd`. When entering any expedition, devroom, or custom map, a Return Portal to Base is automatically spawned near the player's spawn location.
+   - Configured `scripts/CustomPortal.gd` to handle direct return teleportation to Tactical Base Shelter (`house`).
+
+3. FULL UI ENGLISH LOCALIZATION:
+   - Completed English translation for remaining UI labels, NPC trade text, interaction prompts, and log messages.
 ==============================================================================

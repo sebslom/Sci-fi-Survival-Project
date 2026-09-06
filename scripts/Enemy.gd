@@ -52,7 +52,7 @@ func _setup_enemy_stats():
 		hp = 70; max_hp = 70; damage = 12; exp_reward = 50; move_speed = 3.6
 		perception_range = 18.0
 	elif enemy_type == "bandit_heavy":
-		enemy_name = "Bandyta Ciężki Pancerz"
+		enemy_name = "Heavy Armored Bandit"
 		hp = 110; max_hp = 110; damage = 18; exp_reward = 80; move_speed = 2.8
 		perception_range = 16.0
 		is_armored = true
@@ -159,17 +159,17 @@ func take_damage(amount: int, ammo_type: String = "standard"):
 		SoundManager.play_hit()
 	
 	if is_boss:
-		GameManager.add_log("Boss", "Trafiłeś Bossa za " + str(int(final_damage)) + " HP! (" + str(max(0, hp)) + " / " + str(max_hp) + ")")
+		GameManager.add_log("Boss", "Hit Boss for " + str(int(final_damage)) + " HP! (" + str(max(0, hp)) + " / " + str(max_hp) + ")")
 	else:
-		GameManager.add_log("Combat", "Trafiłeś " + enemy_name + " za " + str(int(final_damage)) + " obrażeń!")
+		GameManager.add_log("Combat", "Hit " + enemy_name + " za " + str(int(final_damage)) + " damage!")
 	
 	if hp <= 0:
 		if SoundManager:
 			SoundManager.play_enemy_death()
 		if is_boss:
-			GameManager.add_log("Boss", "🏆 POKONAŁEŚ DUŻEGO MUTANTA MARSJAŃSKIEGO! (+" + str(exp_reward) + " EXP)")
+			GameManager.add_log("Boss", "🏆 DEFEATED HEAVY MARTIAN MUTANT! (+" + str(exp_reward) + " EXP)")
 		else:
-			GameManager.add_log("Combat", "Pokonałeś " + enemy_name + "! (+" + str(exp_reward) + " EXP)")
+			GameManager.add_log("Combat", "Defeated " + enemy_name + "! (+" + str(exp_reward) + " EXP)")
 		
 		GameManager.add_exp(exp_reward)
 		queue_free()

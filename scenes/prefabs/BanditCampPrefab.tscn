@@ -50,7 +50,7 @@ shape = SubResource("Shape_Enemy")
 [node name="BanditGuard2" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.7, -5)
 script = ExtResource("1_enemy")
-enemy_name = "Bandyta Ciężki Pancerz"
+enemy_name = "Heavy Armored Bandit"
 enemy_type = "bandit_heavy"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BanditGuard2"]
