@@ -2,20 +2,14 @@
                     SCI-FI SURVIVAL PROJECT - CHANGELOG
 ==============================================================================
 Engine: Godot Engine 4.6 (GDScript)
-Version: 4.54.0 Expedition Return Portals, CanvasLayer UI Depth & Localization
+Version: 4.55.0 Structure Ground Elevation & Collision Alignment
 Release Date: 06.09.2026
 
 ------------------------------------------------------------------------------
 CHANGES AND UPDATES
 ------------------------------------------------------------------------------
-1. CHAT UNDER UI WINDOWS & MODALS:
-   - Set `ChatBox.tscn` `layer = 5` and `HUD.tscn` `layer = 10`.
-   - The tactical chat box is now guaranteed to render visually behind Log Journal (`[L]`), Map (`[M]`), Crafting (`[C]`), Inventory (`[I]`), Storage Chests, and Pause Menu windows.
-
-2. AUTOMATIC EXPEDITION RETURN PORTALS:
-   - Added `_spawn_expedition_return_portal()` in `scripts/MainScene.gd`. When entering any expedition, devroom, or custom map, a Return Portal to Base is automatically spawned near the player's spawn location.
-   - Configured `scripts/CustomPortal.gd` to handle direct return teleportation to Tactical Base Shelter (`house`).
-
-3. FULL UI ENGLISH LOCALIZATION:
-   - Completed English translation for remaining UI labels, NPC trade text, interaction prompts, and log messages.
+1. GROUND HEIGHT OFFSET & COLLISION ALIGNMENT:
+   - Updated `_update_ghost_building_preview()` in `scripts/Player.gd` to automatically raise object origin by `half_height + 0.01` above collision points when placing on ground/floors.
+   - Structure meshes and colliders now sit flush right on top of ground terrain and floor panels without clipping underneath.
+   - Updated `ghost_area` overlap collision checks to ignore supporting floor/ground nodes (`body == col_node`), enabling green preview validation (`is_ghost_valid = true`) and smooth placement everywhere.
 ==============================================================================

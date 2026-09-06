@@ -425,6 +425,11 @@ func _update_ghost_building_preview():
 		elif f_type == "hydro_shelf": mesh_box_size = Vector3(1.6, 2.4, 1.0)
 		elif f_type == "table": mesh_box_size = Vector3(2.2, 1.0, 1.4)
 		elif f_type == "wardrobe": mesh_box_size = Vector3(1.6, 2.8, 1.0)
+		elif f_type == "chest": mesh_box_size = Vector3(1.4, 1.2, 1.4)
+		elif f_type == "planter": mesh_box_size = Vector3(1.6, 0.8, 1.2)
+		elif f_type == "radio": mesh_box_size = Vector3(0.8, 0.6, 0.5)
+		elif f_type == "light_bulb": mesh_box_size = Vector3(0.4, 0.5, 0.4)
+		elif f_type == "boar_hide": mesh_box_size = Vector3(2.4, 0.05, 1.8)
 
 		if not ghost_mesh_instance.mesh or not (ghost_mesh_instance.mesh is BoxMesh) or ghost_mesh_instance.mesh.get("size") != mesh_box_size:
 			var new_box = BoxMesh.new()
@@ -438,18 +443,27 @@ func _update_ghost_building_preview():
 		elif f_type == "door" and (target_btype == "wall_doorway" or (col_node and col_node.is_in_group("placed_structure"))):
 			ghost_target_pos = col_node.global_position
 		else:
-			# Free placement on wall or ground with optional snap
-			if abs(col_normal.y) < 0.5:
-				ghost_target_pos = col_point + col_normal * 0.1
+			var half_h = mesh_box_size.y * 0.5
+			if col_normal.y > 0.5:
+				# Raise object origin by half height + 0.01 above ground surface so collider sits flush on top of floor/terrain
+				var target_y = col_point.y + half_h + 0.01
+				var grid_step = Vector3(1.0, 0.1, 1.0) if f_type in ["floor", "roof", "stairs", "wall_window", "wall_doorway"] else Vector3(0.5, 0.1, 0.5)
+				var snapped_xz = col_point.snapped(grid_step)
+				ghost_target_pos = Vector3(snapped_xz.x, target_y, snapped_xz.z)
+			elif col_normal.y < -0.5:
+				# Ceiling Placement: shift downward by half height
+				var target_y = col_point.y - half_h - 0.01
+				ghost_target_pos = Vector3(col_point.x, target_y, col_point.z)
 			else:
-				var grid_step = Vector3(1.0, 0.2, 1.0) if f_type in ["floor", "roof", "stairs", "wall_window", "wall_doorway"] else Vector3(0.5, 0.2, 0.5)
-				ghost_target_pos = (col_point + Vector3(0, 0.05, 0)).snapped(grid_step)
+				# Vertical Wall Placement: offset along normal by half depth
+				var half_d = mesh_box_size.z * 0.5 if mesh_box_size.z < mesh_box_size.x else mesh_box_size.x * 0.5
+				ghost_target_pos = col_point + col_normal * (half_d + 0.02)
 
 		ghost_mesh_instance.global_position = ghost_target_pos
 		ghost_mesh_instance.visible = true
 
 		# Update ghost collision shape dimensions for overlap check
-		var ghost_box_size = mesh_box_size * 0.9
+		var ghost_box_size = mesh_box_size * 0.85
 		if ghost_col_shape and ghost_col_shape.shape is BoxShape3D:
 			ghost_col_shape.shape.size = ghost_box_size
 
@@ -459,9 +473,11 @@ func _update_ghost_building_preview():
 			var overlapping_bodies = ghost_area.get_overlapping_bodies()
 			for body in overlapping_bodies:
 				if body == self or body == ghost_mesh_instance: continue
+				# Ignore supporting surface being placed on
+				if body == col_node and col_normal.y > 0.5: continue
 				# Ignore ground terrain surface
 				var bname = body.name.to_lower()
-				if bname.contains("ground") or bname.contains("terrain") or body.is_in_group("terrain"):
+				if bname.contains("ground") or bname.contains("terrain") or body.is_in_group("terrain") or (body is StaticBody3D and (bname.contains("floor") or bname.contains("sand") or bname.contains("map"))):
 					continue
 				# Allow hosting frame for door & window
 				if (f_type == "door" and body == col_node) or (f_type == "window_glass" and body == col_node):
